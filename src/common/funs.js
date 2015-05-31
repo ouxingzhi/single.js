@@ -1,4 +1,5 @@
-define(['Base'],function(Base){
+define(function(require, exports, module) {
+	var Base = require('base/base');
 	var M = {};
 
 	/**

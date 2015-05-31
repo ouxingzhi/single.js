@@ -1,4 +1,6 @@
-define(['Base','BaseEventObject'],function(Base,BaseEventObject){
+define(function(require, exports, module) {
+	var Base = require('base/base'),
+		BaseEventObject = require('base/event');
 
 
 	var toReg = /([\d\.]+)([a-z])/ig;

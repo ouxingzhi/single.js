@@ -1,4 +1,7 @@
-define(['BaseClass','BaseVal'],function(BaseClass,BaseVal){
+define(function(require, exports, module) {
+
+	var BaseClass = require('base/class'),
+		BaseVal = require('base/var');
 	/**
 	 * 基本的对象类，系统中所有类需要继承至它
 	 */

@@ -1,0 +1,1 @@
+define("mvc/layout.full",["mvc/layout"],function(require,t,o){var n=require("mvc/layout"),i='<div class="layout-main"></div>';return n.extend({propertys:function(){this.root=$(i)},initialize:function($super,t){$super(t)},getRoot:function(){return this.root},getFrameBoxs:function(){return{main:this.root}}})});

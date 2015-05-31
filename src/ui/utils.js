@@ -5,8 +5,6 @@ define(function(){
 
 	var utils = {};
 
-	utils
-
 	return utils;
 
 });

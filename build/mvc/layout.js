@@ -1,0 +1,1 @@
+define("mvc/layout",["base/event"],function(require,e,t){var o=require("base/event"),n=o.extend({propertys:function(){this.app},initialize:function($super,e){this.app=e,$super()},getRoot:function(){throw'no override method "getRoot"!'},getFrameBoxs:function(){throw'no override method "getContainers"!'}});return n});

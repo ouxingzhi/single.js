@@ -1,4 +1,7 @@
-define(['Base','BaseObject','BaseVal'],function(Base,BaseObject,BaseVal){
+define(function(require, exports, module) {
+	var Base = require('base/base'),
+		BaseObject = require('base/object'),
+		BaseVal = require('base/var');
 	var Event = BaseObject.extend({
 		propertys:function(){
 			this.__event = BaseVal({});

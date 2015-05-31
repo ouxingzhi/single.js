@@ -1,0 +1,1 @@
+define("ui/base",["base/base","common/funs"],function(require,e,t){var f=(require("base/base"),require("common/funs")),n={};return n.getOffsetByPage=function(e){var t=0,f=0;if(!e)return{left:t,top:f};do t+=e.offsetLeft,f+=e.offsetTop;while(e=e.offsetParent);return{top:f,left:t}},n.createUiId=function(e){return function(){return"uiId_"+e()}}(f.createAddSelf()),n});

@@ -1,0 +1,1 @@
+define("ui/object",["base/base","base/base","ui/base","base/object"],function(require,e,b){var s=(require("base/base"),require("base/base")),a=require("ui/base"),i=require("base/object");return s(i,{propertys:function(){this.uiId=a.createUiId()},getUiId:function(){return this.uiId}})});

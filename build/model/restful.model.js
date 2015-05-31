@@ -1,0 +1,1 @@
+define("model/restful.model",["model/model"],function(require,e,n){var t=require("model/model");return t.extend({ajaxRequest:function(e,n,t,o){var a=this;return $.ajax({url:e,data:JSON.stringify(n),type:"post",contentType:"application/json",dataType:"json",success:function(e){t.call(a,e)},error:function(e){o.call(a,e)}})}})});

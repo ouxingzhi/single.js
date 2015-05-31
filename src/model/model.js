@@ -1,4 +1,7 @@
-define(['Base','BaseEventObject','StorageAbstractStote'],function(Base,BaseEventObject,StorageAbstractStote){
+define(function(require, exports, module) {
+	var Base = require('base/base'),
+		BaseEventObject = require('base/event'),
+		StorageAbstractStote = require('storage/store');
 	
 	function noop(){}
 

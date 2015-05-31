@@ -1,0 +1,1 @@
+define("common/funs",["base/base"],function(require,e,n){var r=(require("base/base"),{});return r.createAddSelf=function(e){return e=e||0,function(){return e++}},r});

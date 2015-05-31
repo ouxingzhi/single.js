@@ -1,4 +1,6 @@
-define(['Base','BaseObject'],function(Base,BaseObject){
+define(function(require, exports, module) {
+	var Base = require('base/base'),
+		BaseObject = require('base/object');
 	//匹配url
 	var urlreg = /^\s*(?:(^[a-z]+):)?(?:\/\/([^\/]+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?\s*$/im,
 		queryStringReg = /([^=&]*)=([^=&]*)/g,

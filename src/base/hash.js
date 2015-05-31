@@ -1,4 +1,6 @@
-define(['BaseObject','Base'],function(BaseObject,Base){
+define(function(require, exports, module) {
+	var BaseObject = require('base/object'),
+		Base = require('base/object');
 	return BaseObject.extend({
 		propertys:function(){
 			this.keys = [];

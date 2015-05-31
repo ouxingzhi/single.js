@@ -1,0 +1,1 @@
+define("model/form.model",["model/model"],function(require,e,t){var a=require("model/model");return a.extend({propertys:function(){this.ajaxType="post"},ajaxRequest:function(e,t,a,o){var n=this;return $.ajax({url:e,data:t,type:this.ajaxType,dataType:"json",success:function(e){a.call(n,e)},error:function(e){o.call(n,e)}})}})});

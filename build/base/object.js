@@ -1,0 +1,1 @@
+define("base/object",["base/class","base/var"],function(require,s,a){var e=require("base/class"),t=require("base/var"),n=e({destruct:function(){var s;for(var a in this)this.hasOwnProperty(a)&&(s=this[a],s instanceof t&&s.del(),this[a]=null)}});return n});

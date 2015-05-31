@@ -1,4 +1,5 @@
-define(['ModelAbstractModel'],function(ModelAbstractModel){
+define(function(require, exports, module) {
+	var ModelAbstractModel = require('model/model');
 
 	return ModelAbstractModel.extend({
 		propertys:function(){

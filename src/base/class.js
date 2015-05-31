@@ -1,5 +1,6 @@
-define(['Base'],function(Base){
+define(function(require, exports, module) {
 	"use strict";
+	var Base = require('base/base');
 	function noop(){};
 
 	function injectfn(supfn,subfn){

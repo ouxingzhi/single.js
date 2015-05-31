@@ -1,4 +1,6 @@
-define(['Base','CommonFuns'],function(base,CommonFuns){
+define(function(require, exports, module) {
+	var base = require('base/base'),
+		CommonFuns = require('common/funs');
 	var M = {};
 
 	/**

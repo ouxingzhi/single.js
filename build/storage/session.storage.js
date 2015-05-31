@@ -1,0 +1,1 @@
+define("storage/session.storage",["storage/storage"],function(require,e,s){var o=require("storage/storage");return new o(sessionStorage)});

@@ -1,3 +1,0 @@
-seajs.config({
-	base:'./'
-});

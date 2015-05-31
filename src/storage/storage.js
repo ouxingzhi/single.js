@@ -1,4 +1,6 @@
-define(['Base','BaseObject'],function(Base,BaseObject){
+define(function(require, exports, module) {
+	var Base = require('base/base'),
+		BaseObject = require('base/object');
 	return BaseObject.extend({
 		propertys:function(){
 			this.proxy;

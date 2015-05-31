@@ -1,0 +1,1 @@
+define("base/log",[],function(){function o(){return"boolean"==typeof __SINGE_DEBUG__&&__SINGE_DEBUG__===!0}return{log:function(n,e){o()&&(e||(e="default"),console.log(e+": "+n))},err:function(n,e){o()&&(e||(e="default"),console.error(e+": "+n))}}});
