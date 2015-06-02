@@ -6,6 +6,9 @@ define(function(require, exports, module) {
 	 * 基本的对象类，系统中所有类需要继承至它
 	 */
 	var BaseObject = BaseClass({
+		initialize:function($super,options){
+			$super(options);
+		},
 		/**
 		 * 销毁当前对象
 		 */

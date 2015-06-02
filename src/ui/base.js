@@ -25,7 +25,30 @@ define(function(require, exports, module) {
 		};
 	};
 
-	
+	/**
+	 * 获得页面的实际高度
+	 * @return {Object} 返回页面高宽
+	 * 		|- width 宽
+	 *		|- height 高
+	 */
+	M.getPageSize = function(){
+		if(!document.body){
+			return {width:0,height:0};
+		}
+		return {
+			height:document.body.scrollHeight,
+			width:document.body.scrollWidth
+		};
+	};
+
+	/**
+	 * ui组件zindex生成器
+	 */
+	M.createZIndex = function(addSelf,index){
+		return function(){
+			return index + addSelf();
+		};
+	}(CommonFuns.createAddSelf(),2000);
 
 	/**
 	 * ui组件id生成器
@@ -36,5 +59,13 @@ define(function(require, exports, module) {
 		};
 	}(CommonFuns.createAddSelf());
 	
+	/**
+	 * ui组件Name生成器
+	 */
+	M.createFnName = function(addSelf){
+		return function(){
+			return 'fn_' + addSelf();
+		};
+	}(CommonFuns.createAddSelf());
 	return M;
 });

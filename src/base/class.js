@@ -62,8 +62,13 @@ define(function(require, exports, module) {
 
 		for(i in subPropertys){
 			if(subPropertys.hasOwnProperty(i) && notInheritPropertys[i] !== ID){
-				if(typeof supProto[i] === 'function' && subPropertys[i].toString().match(matchParam)){
-					Class.prototype[i] = injectfn(supProto[i],subPropertys[i]);
+				if(subPropertys[i].toString().match(matchParam)){
+					if(typeof supProto[i] === 'function'){
+						Class.prototype[i] = injectfn(supProto[i],subPropertys[i]);
+					}else{
+						Class.prototype[i] = injectfn(function(){},subPropertys[i]);
+					}
+					
 				}else{
 					Class.prototype[i] = subPropertys[i];
 				}

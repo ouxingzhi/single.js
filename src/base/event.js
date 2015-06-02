@@ -6,6 +6,9 @@ define(function(require, exports, module) {
 		propertys:function(){
 			this.__event = BaseVal({});
 		},
+		initialize:function($super,options){
+			$super(options);
+		},
 		on:function(type,fn,space,override){
 			var e = this.__event;
 			e.v[type] = e.v[type] || [];
@@ -30,7 +33,7 @@ define(function(require, exports, module) {
 				e.v[type] = [];
 			}
 		},
-		emit:function(type,data){
+		emit:function(type){
 			var e = this.__event,index,self = this;
 			e.v[type] = e.v[type] || [];
 			var args = Base.toArray(arguments);

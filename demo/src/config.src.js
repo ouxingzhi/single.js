@@ -1,6 +1,6 @@
 seajs.config({
 	base:'../src',
 	paths:{
-		'webapp':'/javascript/singe.js/demo/src'
+		'webapp':'/javascript/single.js/demo/src'
 	}
 });
