@@ -23,8 +23,19 @@ define(function(require){
 		switchheader2:function(){
 		},
 		onLoad:function(){
-			var loading = new UiLoading();
-			loading.show();
+			this.toHead(this.id,{
+				template:'<span class="back"><%=backtitle%></span><h3><%=title%></h3>',
+				data:{
+					title:'上海',
+					backtitle:'返回'
+				},
+				events:{
+					'click .back':function(){
+						this.back();
+					}
+				},
+				space:this
+			});
 			this.turning();
 		},
 		onShow:function(){

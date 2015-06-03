@@ -4,10 +4,22 @@ define(function(require, exports, module) {
 		BaseHash = require('base/hash'),
 		Promise = require('base/promise'),
 		CommonUrlHash = require('common/url.hash'),
+		MvcHeader = require('mvc/header'),
 		MvcTransitionDefault = require('mvc/transition.default');
 
-	var CLS_FRAME_VIEWPORT = 'fly-frame-viewport',
-		framehtml = '<div class="'+CLS_FRAME_VIEWPORT+'"></div>';
+	var CLS_FRAME_BOX = 'fly-frame-box',
+		CLS_FRAME_HEAD = 'fly-frame-head',
+		CLS_FRAME_VIEWPORT = 'fly-frame-viewport',
+		CLS_FRAME_FOOT = 'fly-frame-foot',
+		framehtml = [
+			'<div class="'+CLS_FRAME_BOX+'">',
+				'<div class="'+CLS_FRAME_HEAD+'"></div>',
+				'<div class="'+CLS_FRAME_VIEWPORT+'">',
+
+				'</div>',
+				'<div class="'+CLS_FRAME_FOOT+'"></div>',
+			'</div>'
+		].join('');
 
 
 
@@ -17,7 +29,15 @@ define(function(require, exports, module) {
 
 			this.root = $(framehtml);
 
-			this.viewport = this.root;
+			this.viewhead = this.root.find('.' + CLS_FRAME_HEAD);
+
+			this.viewport = this.root.find('.' + CLS_FRAME_VIEWPORT);
+
+			this.viewfoot = this.root.find('.' + CLS_FRAME_FOOT);
+
+			this.header = new MvcHeader({
+				box:this.viewhead
+			});
 
 			this.name;
 
@@ -80,6 +100,7 @@ define(function(require, exports, module) {
 				hashdata = CommonUrlHash.parse(this.defaultView);
 			}
 			this.hashdata = hashdata;
+			this.header.setForward(this.hashdata.forward);
 			this.toView(hashdata.view,hashdata);
 		},
 		toView:function(viewname,hashdata){
@@ -147,7 +168,10 @@ define(function(require, exports, module) {
 			}
 		},
 		back:function(){
-
+			history.back();
+		},
+		toHead:function(pageid,options){
+			this.header.to(pageid,options);
 		}
 	});
 	return Frame;

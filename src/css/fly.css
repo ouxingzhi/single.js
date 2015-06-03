@@ -10,41 +10,48 @@ html,body{ padding:0px; margin:0px;}
 	width:100%;
 	height:100%;
 	position:absolute;
+	overflow:hidden;
 }
 
 
 
 .fly-frame-viewport{
-	overflow:hidden;
+	
 	width:100%;
 	height:100%;
+	box-sizing:border-box;
+	position:relative;
+	z-index:99;
+}
+
+.fly-frame-box{
+	height:100%;
+	width:100%;
+	overflow:hidden;
 }
 
 .viewroot-box{
 	position:absolute;
-	left:0px;
-	top:0px;
 	width:100%;
 	height:100%;
 	background:#fff;
+	overflow:auto;
+	-webkit-overflow-scrolling: touch;
+  	-webkit-box-sizing: border-box;
+  	padding-top:60px;
+	box-sizing:border-box;
 }
 
 /*  */
-.layout-head{
-	position:absolute;
+.fly-frame-head{
+	position:fixed;
 	width:100%;
 	height:60px;
 	top:0px;
 	left:0px;
+	background:#f00;
+	z-index:100;
 }
-.layout-content{
-	position:absolute;
-	width:100%;
-	top:60px;
-	left:0px;
-	bottom:0px;
-}
-
 
 @-webkit-keyframes default_forward_out{
 	from{
@@ -108,6 +115,77 @@ html,body{ padding:0px; margin:0px;}
 	-webkit-animation:default_back_in .5s ease-out;
 }
 
+/** header 动画 **/
+@-webkit-keyframes header_forward_out{
+	from{
+		left:0%;
+		opacity:1;
+	}
+	to{
+		left:-50%;
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes header_forward_in{
+	from{
+		left:50%;
+		opacity:0;
+	}
+	to{
+		left:0%;
+		opacity:1;
+	}
+}
+
+@-webkit-keyframes header_back_out{
+	from{
+		left:0%;
+		opacity:1;
+	}
+	to{
+		left:50%;
+		opacity:0;
+	}
+}
+
+@-webkit-keyframes header_back_in{
+	from{
+		left:-50%;
+		opacity:0;
+	}
+	to{
+		left:0%;
+		opacity:1;
+	}
+}
+
+/**
+ * 向前的离开
+ */
+.header_forward_out{
+	-webkit-animation:header_forward_out .5s ease ;
+
+}
+/**
+ * 向前的进入
+ */
+.header_forward_in{
+	-webkit-animation:header_forward_in .5s ease;
+}
+/**
+ * 返回的离开
+ */
+.header_back_out{
+	-webkit-animation:header_back_out .5s ease ;
+}
+/**
+ * 返回的进入
+ */
+.header_back_in{
+	-webkit-animation:header_back_in .5s ease;
+}
+
 
 .silky-box{ overflow:hidden;}
 .silky-subbox{ display:table;}
@@ -158,6 +236,10 @@ html,body{ padding:0px; margin:0px;}
 
 .ui-loading:after{
 }
+
+.block-view{ display:none; position:absolute; left:0px; top:0px; width:100%; height:100%; }
+.cur-block-view{ display:block;}
+
 
 .spinner {
   width: 50%;
