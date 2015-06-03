@@ -5,30 +5,38 @@ var seajs = require('gulp-seajs-transport');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var minifycss = require('gulp-minify-css');
-//var r = require('gulp-seajs-r');
+var minifyhtml = require('gulp-html-minifier');
+var r = require('gulp-seajs-r');
 
 var src = './src';
 
 var build = './build'
-/*
-gulp.task('default',function(){
-	return gulp.src(src + '/**')
-		.pipe(r());
 
-});*/
+// gulp.task('default',function(){
+// 	return gulp.src(src + '/**',{base:'./src'})
+// 		.pipe(r());
+// 	console.log(module);
+
+// });
 
 gulp.task('build.min.js',['clean'],function(){
 	return gulp.src([src + '/**/*.js'],{base:src})
-		.pipe(seajs())
+		.pipe(r())
 		.pipe(uglify({
             mangle: {except: ['require','$super']}
         }))
 		.pipe(gulp.dest(build));
 });
 
+gulp.task('build.min.html',['clean'],function(){
+	return gulp.src([src + '/**/*.html'])
+		.pipe(minifyhtml({collapseWhitespace: true}))
+		.pipe(gulp.dest(build));
+});
+
 gulp.task('build.pack.js',['clean'],function(){
-	return gulp.src([src + '/**/*.js'],{base:src})
-		.pipe(seajs())
+	return gulp.src([src + '/**/*.js',src + '/**/*.html'],{base:src})
+		.pipe(r())
 		.pipe(uglify({
             mangle: {except: ['$super']}
         }))
@@ -48,4 +56,4 @@ gulp.task('clean',function(){
 });
 
 
-gulp.task('default',['build.min.js','build.pack.js','minify.css']);
+gulp.task('default',['build.min.js','build.pack.js','build.min.html','minify.css']);

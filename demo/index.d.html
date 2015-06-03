@@ -17,7 +17,8 @@
 	
 
 	<script type="text/javascript">
-		seajs.use(['mvc/application','webapp/app.config'],function(MvcApplication,config){
+		seajs.use(['mvc/application','webapp/app.config','text!html/index.html'],function(MvcApplication,config,html){
+			console.log(html);
 			new MvcApplication(config).start();
 		})
 	</script>

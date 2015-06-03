@@ -1,0 +1,1 @@
+define("mvc/header.js",["mvc/block","mvc/transition.header"],function(require){var n=require("mvc/block"),i=require("mvc/transition.header");return n.extend({propertys:function(){this.transition=i},initialize:function($super,n){$super(n)}})});
