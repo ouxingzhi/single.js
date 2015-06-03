@@ -29,10 +29,13 @@ define(function(require){
 					this.doms[cls] = this.$el.find('.'+cls);
 				},this);
 				buildEvent.call(this);
+			});
+			this.on('show',function(){
 				this.update();
 			});
 			this.click = noop;
 			this.content = '';
+
 
 		},
 		initialize:function($super,options){
@@ -56,5 +59,23 @@ define(function(require){
 				this.doms[C.UI_TOAST_CONTENT].html(this.content);
 			}
 		},
+		show:function($super,options){
+			
+			if(options){
+				if(options.click){
+					this.click = opitons.click;
+				}
+				if(options.content){
+					this.content = options.content;
+				}
+				if(options.timeout){
+					setTimeout(function(){
+						this.hide();
+						options.callback && options.callback.call(this);
+					}.bind(this),options.timeout*1000);
+				}
+			}
+			$super(options);
+		}
 	});
 });

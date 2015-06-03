@@ -2,6 +2,8 @@ define(function(require){
 	var Base = require('base/base');
 	var UiBase = require('ui/base');
 	var UiObject =  require('ui/object');
+	var UiMask = require('ui/mask');
+
 	/**
 	 * 所有弹出层的父类
 	 * 
@@ -16,15 +18,34 @@ define(function(require){
 			//偏移Y
 			this.offsetY = 0;
 
+			this.useMask = true;
+			this.mask = null;
+
+			this.maskOpacity = true;
+
 			this.on('create',function(){
 				this.$el.addClass('ui-layer');
+				if(this.useMask){
+					this.mask = new UiMask();
+				}
 			});
 			this.on('show',function(){
-				this.updatePosition();
 				this.startAutoPosition();
+				if(this.useMask){
+					this.mask.show(!this.maskOpacity);
+					this.mask.topIndex();
+				}
+				this.updatePosition();
+				setTimeout(function(){
+					this.updatePosition();
+				}.bind(this),0);
+				
 				this.topIndex();
 			});
 			this.on('hide',function(){
+				if(this.useMask){
+					this.mask.hide();
+				}
 				this.endAutoPosition();
 			});
 			//自动定位的回调
@@ -34,6 +55,8 @@ define(function(require){
 			this.on('resize',function(){
 				this.updatePosition();
 			});
+
+			
 		},
 		initialize:function($super,options){
 			$super(options);
@@ -48,6 +71,14 @@ define(function(require){
 
 			if(!Base.isNUL(options.offsetY)){
 				this.offsetY = options.offsetY;
+			}
+
+			if(!Base.isNUL(options.useMask)){
+				this.useMask = options.useMask;
+			}
+
+			if(!Base.isNUL(options.maskOpacity)){
+				this.maskOpacity = options.maskOpacity;
 			}
 		},
 		getPosInfo:function(){
@@ -75,13 +106,19 @@ define(function(require){
 			}
 		},
 		createHTML:function(){
-
+			return '';
 		},
 		startAutoPosition:function(){
 			$window.on('resize',this[this.__autoFnName]);
 		},
 		endAutoPosition:function(){
 			$window.off('resize',this[this.__autoFnName]);
+		},
+		show:function($super,options){
+			if(options && !Base.isNUL(options.maskOpacity)){
+				this.maskOpacity = options.maskOpacity;
+			}
+			$super(options);
 		}
 	});
 });

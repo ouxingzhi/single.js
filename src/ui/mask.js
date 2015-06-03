@@ -2,6 +2,8 @@ define(function(require){
 	var Base = require('base/base');
 	var UiObject = require('ui/object');
 
+	var CLS_NOT_OPACITY = 'ui-mask-not-opacity';
+
 	/**
 	 * @private buildEvent
 	 */
@@ -47,6 +49,15 @@ define(function(require){
 		},
 		createHTML:function(){
 			return '';
+		},
+		show:function($super,notopacity){
+			$super();
+			if(notopacity){
+				this.$el.addClass(CLS_NOT_OPACITY);
+			}else{
+				this.$el.removeClass(CLS_NOT_OPACITY);
+			}
+			
 		}
 	});
 });

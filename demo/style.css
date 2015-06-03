@@ -1,0 +1,4 @@
+.head-left-btn,.head-right-btn{ height:100%;position:absolute; top:0px; line-height:60px;}
+.head-left-btn{ left:0px; width:50px; }
+.head-right-btn{ right:0px; width:100px;}
+.head-title{ padding:0px 50px; text-align:center;}

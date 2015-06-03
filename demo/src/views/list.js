@@ -1,5 +1,5 @@
 define(function(require){
-	var MvcView = require('mvc/view'),
+	var MvcView = require('webapp/common/baseview'),
 		html = require('text!webapp/templates/list.html');
 	return MvcView.extend({
 		onCreate:function(){
@@ -18,18 +18,15 @@ define(function(require){
 		switchheader2:function(){
 		},
 		onLoad:function(){
-			this.toHead(this.id,{
-				template:'<span class="back"><%=backtitle%></span><h3><%=title%></h3>',
-				data:{
-					title:'苏州',
-					backtitle:'返回'
+			this.setHeader({
+				title:'列表',
+				leftHandle:function(){
+					this.back();
 				},
-				events:{
-					'click .back':function(){
-						this.back();
-					}
-				},
-				space:this
+				rightTitle:'试一试',
+				rightHandle:function(){
+					alert('list.right');
+				}
 			});
 			this.turning();
 		},

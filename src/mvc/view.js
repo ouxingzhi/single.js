@@ -100,6 +100,24 @@ define(function(require, exports, module) {
 		},
 		toHead:function(pageid,options){
 			this.frame.toHead(pageid,options);
+		},
+		showToast:function(){
+			this.frame.showToast.apply(this.frame,arguments)
+		},
+		hideToast:function(){
+			this.frame.hideToast.apply(this.frame,arguments)
+		},
+		showAlert:function(ops){
+			this.frame.showAlert.apply(this.frame,arguments)
+		},
+		hideAlert:function(){
+			this.frame.hideAlert.apply(this.frame,arguments)
+		},
+		showLoading:function(maskOpacity){
+			this.frame.showLoading.apply(this.frame,arguments)
+		},
+		hideLoading:function(){
+			this.frame.hideLoading.apply(this.frame,arguments)
 		}
 	});
 

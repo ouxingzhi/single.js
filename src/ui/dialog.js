@@ -103,7 +103,7 @@ define(function(require){
 			if(!Base.isNUL(options.content)){
 				this.content = options.content;
 			}
-			if(!Base.isNUL(options.buttons)){
+			if(options.buttons && options.buttons.length){
 				this.buttons = options.buttons;
 			}else{
 				this.buttons = defaultButtons;
@@ -152,9 +152,13 @@ define(function(require){
 				'</div>'
 			].join('');
 		},
-		
-		setData:function(opsions){
-			this.setOption(opitons);
+		show:function($super,options){
+			$super(options);
+			if(options){
+				this.setOption(options);
+				this.update();
+			}
+			
 		}
 	});
 });

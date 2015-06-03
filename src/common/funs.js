@@ -14,6 +14,17 @@ define(function(require, exports, module) {
 		};
 	};
 
+	/**
+	 * 单例生成器
+	 */
+	M.createSingle = function(Class){
+		var instance;
+		return function(param){
+			if(instance) return instance;
+			return instance = new Class(param);
+		}
+	}
+
 
 	return M;
 });

@@ -3,9 +3,17 @@ define(function(require, exports, module) {
 		BaseEventObject = require('base/event'),
 		BaseHash = require('base/hash'),
 		Promise = require('base/promise'),
+		CommonFuns = require('common/funs'),
 		CommonUrlHash = require('common/url.hash'),
 		MvcHeader = require('mvc/header'),
 		MvcTransitionDefault = require('mvc/transition.default');
+
+		//常用ui组件
+	var UiDialog = require('ui/dialog'),
+		UiToast = require('ui/toast'),
+		UiLoading = require('ui/loading');
+
+
 
 	var CLS_FRAME_BOX = 'fly-frame-box',
 		CLS_FRAME_HEAD = 'fly-frame-head',
@@ -21,7 +29,18 @@ define(function(require, exports, module) {
 			'</div>'
 		].join('');
 
-
+		/**
+		 * @private getToast()
+		 */
+	var getToast = CommonFuns.createSingle(UiToast),
+		/**
+		 * @private getDialog()
+		 */
+		getDialog = CommonFuns.createSingle(UiDialog),
+		/**
+		 * @private getLoading()
+		 */
+		getLoading = CommonFuns.createSingle(UiLoading);
 
 	var Frame = BaseEventObject.extend({
 		propertys:function(){
@@ -172,6 +191,32 @@ define(function(require, exports, module) {
 		},
 		toHead:function(pageid,options){
 			this.header.to(pageid,options);
+		},
+		showToast:function(content,timeout,callback){
+			getToast().show({
+				content:content,
+				timeout:timeout,
+				callback:callback
+			});
+		},
+		hideToast:function(){
+			getToast().hide()
+		},
+		showAlert:function(title,content,buttons){
+			getDialog().show({
+				title:title || '标题',
+				content:content || '',
+				buttons:buttons
+			});
+		},
+		hideAlert:function(){
+			getDialog().hide();
+		},
+		showLoading:function(maskOpacity){
+			getLoading().show({maskOpacity:maskOpacity});
+		},
+		hideLoading:function(){
+			getLoading().hide();
 		}
 	});
 	return Frame;
