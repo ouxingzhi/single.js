@@ -15,10 +15,10 @@ define(function(require, exports, module) {
 
 
 
-	var CLS_FRAME_BOX = 'fly-frame-box',
-		CLS_FRAME_HEAD = 'fly-frame-head',
-		CLS_FRAME_VIEWPORT = 'fly-frame-viewport',
-		CLS_FRAME_FOOT = 'fly-frame-foot',
+	var CLS_FRAME_BOX = 'single-frame-box',
+		CLS_FRAME_HEAD = 'single-frame-head',
+		CLS_FRAME_VIEWPORT = 'single-frame-viewport',
+		CLS_FRAME_FOOT = 'single-frame-foot',
 		framehtml = [
 			'<div class="'+CLS_FRAME_BOX+'">',
 				'<div class="'+CLS_FRAME_HEAD+'"></div>',

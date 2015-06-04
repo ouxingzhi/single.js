@@ -15,7 +15,7 @@ html,body{ padding:0px; margin:0px;}
 
 
 
-.fly-frame-viewport{
+.single-frame-viewport{
 	
 	width:100%;
 	height:100%;
@@ -24,7 +24,7 @@ html,body{ padding:0px; margin:0px;}
 	z-index:99;
 }
 
-.fly-frame-box{
+.single-frame-box{
 	height:100%;
 	width:100%;
 	overflow:hidden;
@@ -43,7 +43,7 @@ html,body{ padding:0px; margin:0px;}
 }
 
 /*  */
-.fly-frame-head{
+.single-frame-head{
 	position:fixed;
 	width:100%;
 	height:60px;
