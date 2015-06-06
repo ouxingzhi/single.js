@@ -1,7 +1,8 @@
 define(function(require) {
 	var Base = require('base/base'),
 		UiBase = require('ui/base'),
-		BaseEvent = require('base/event');
+		BaseEvent = require('base/event'),
+		CommonFuns = require('common/funs');
 	var CLASS_ROOT = 'ui-root';
 	var UiObject = BaseEvent.extend({
 		propertys:function(){
@@ -82,6 +83,11 @@ define(function(require) {
 				this.$el.css('zIndex',UiBase.createZIndex());
 			}
 		},
+		createDomId:function(addfn){
+			return function(){
+				return 'comid-'+addfn();
+			}
+		}(CommonFuns.createAddSelf()),
 		destroy:function(){
 			if(this.$el){
 				this.$el.remove();

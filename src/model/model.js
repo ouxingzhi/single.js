@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
 	var Base = require('base/base'),
 		BaseEventObject = require('base/event'),
+		CommonFuns = require('common/funs'),
 		StorageAbstractStote = require('storage/store');
 	
 	function noop(){}
@@ -9,16 +10,39 @@ define(function(require, exports, module) {
 		MODEL_STATE_LOADING = 1,
 		MODEL_STATE_SUCCESS = 2;
 
+	//@private 
+	var clearEvents = function(){
+		this.off('success');
+		this.off('error');
+		this.off('abort');
+	};
+
+	var preg = /\{[^\{\}]*\}/;
+
 	var AbstractModel = BaseEventObject.extend({
 		propertys:function(){
-			this.baseurl = this.buildBaseUrl();
-			this.url = this.buildUrl();
+			this._xhr;
+			this.type = 'post';
+			//需要从param获得的get参数
+			this.getfields = [];
+
+			this.pathfields = [];
+			
 			this.param = this.buildParam();
 			this.result = this.buildResult();
 			this.state = MODEL_STATE_INIT;
 		},
 		initialize:function(){
 
+		},
+		setType:function(type){
+			this.type = type;
+		},
+		/**
+		 * 用于设置当前model需要从param中提取哪些参数作为get参数,在非get模式下起效。
+		 */
+		fieldsGet:function(){
+			return [];
 		},
 		buildBaseUrl:function(){
 			throw "Please override the `buildBaseUrl` method";
@@ -33,18 +57,32 @@ define(function(require, exports, module) {
 			throw "Please override the `buildResult` method";
 		},
 		ajaxRequest:function(){
-			throw "Please override the `ajaxRequest` method";
+			throw "Please override the `ajaxRequest(type,url)` method";
 		},
 		verifyData:function(data){
 			return true;
 		},
-		getParam:function(){
+		/**
+		 * 获得Param的参数值
+		 * @param k {String} 可选，不传则返回整个param，传则根据路径进行返回。
+		 * @return {Object}
+		 */
+		getParam:function(k){
 			if(this.param instanceof StorageAbstractStote){
-				return this.param.get();
+				if(k){
+					return this.param.getAttr(k);
+				}else{
+					return this.param.get();
+				}
 			}else{
 				return this.param;
 			}
 		},
+		/**
+		 * 设置参数
+		 * @param k {Object|String|Number} 参数的key
+		 * @param v {Object} 要设置的值
+		 */
 		setParam:function(k,v){
 			if(Base.type(k) === 'object'){
 				Base.each(k,function(v,k){
@@ -59,6 +97,10 @@ define(function(require, exports, module) {
 				this.param[k] = v;
 			}
 		},
+		/**
+		 * 删除某个参数
+		 * @param n {String} 要删除的键值
+		 */
 		delParam:function(n){
 			if(Base.type(n) === 'array'){
 				Base.each(n,function(n){
@@ -91,11 +133,16 @@ define(function(require, exports, module) {
 				this.result = data;
 			}
 		},
-		clearEvents:function(){
-			this.off('success');
-			this.off('error');
-			this.off('abort');
-		},
+		
+		/**
+		 * 发送请求
+		 * @param events {Object} 定义的事件
+		 * 		|--success 	完成时的事件
+		 *		|--error 	错误时的事件 
+		 *		|--abort 	取消请求时的事件
+		 * @param space {Object} 执行上下文
+		 * @return {XMLHTTPRequest} 返回ajax对象
+		 */
 		request:function(events,space){
 			events = events || {};
 			var success = events.success || noop,
@@ -118,11 +165,49 @@ define(function(require, exports, module) {
 				this.on('abort',abort,space);
 				if(this.state === MODEL_STATE_LOADING) return;
 			}
+			this.baseurl = this.buildBaseUrl();
+			this.url = this.buildUrl();
 
 			var url = (this.baseurl.replace(/\/+$/g,'') + '/' + this.url.replace(/^\/+/g,'')),
 				param = this.getParam();
 			var self = this;
-			this.ajaxRequest(url,param,function(data){
+			//当非get模式时，将允许参数加入到querystring中
+			if(this.type && !this.type.match(/get/i)){
+				var sf = url.indexOf('?') > -1 ? '&' : '?',
+					qs = function(fileds,param){
+						var vk = [];
+						if(fileds === '*'){
+							Base.each(param,function(v,k){
+								vk.push(k + '=' + v);
+							});
+						}else{
+							Base.each(fileds,function(k){
+								if(param[k]){
+									vk.push(k + '=' + param[k]);
+								}
+							});
+						}
+						
+						return vk.join('&');
+					}(this.fieldsGet(),param);
+				if(qs){
+					url = (url + sf + qs).replace(/\?{2,}/i,'?').replace(/\?&+/i,'?');
+				}
+				
+			}
+			//将参数添加到url中
+			var delkeys = [];
+			if(url.match(preg)){
+				url = CommonFuns.formatString(url,param||{},function(key){
+					delkeys.push(key);
+				});
+				Base.each(delkeys,function(key){
+					delete param[key];
+				});
+			}
+			this.isAbort = false;
+			this.state = MODEL_STATE_LOADING;
+			this._xhr = this.ajaxRequest(this.type,url,param,function(data){
 				if(self.verifyData(data)){
 					self.setResult(data);
 					self.emit('success',data);
@@ -131,13 +216,29 @@ define(function(require, exports, module) {
 					self.emit('error',data);
 					self.state = MODEL_STATE_INIT;
 				}
-				self.clearEvents();
+				clearEvents.call(self);
+				this.isAbort = false;
 			},function(e){
-				self.emit('error',e);
+				if(this.isAbort){
+					self.emit('abort',e);
+				}else{
+					self.emit('error',e);
+				}
 				self.state = MODEL_STATE_INIT;
-				self.clearEvents();
+				clearEvents.call(self);
+				this.isAbort = false;
 			});
-			this.state = MODEL_STATE_LOADING;
+			return this._xhr;
+		},
+		/**
+		 * 取消最近一次请求.
+		 */
+		abort:function(){
+			if(this._xhr){
+				this.isAbort = true;
+				this._xhr.abort();	
+			}
+			
 		}
 	});
 

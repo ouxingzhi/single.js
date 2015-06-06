@@ -3,20 +3,20 @@ define(function(require, exports, module) {
 
 	return ModelAbstractModel.extend({
 		propertys:function(){
-			this.ajaxType = 'post';
+
 		},
-		ajaxRequest:function(url,param,success,error){
+		ajaxRequest:function(type,url,param,success,error){
 			var self = this;
 			return $.ajax({
 				url:url,
 				data:param,
-				type:this.ajaxType,
+				type:type,
 				dataType:'json',
 				success:function(data){
-					success.call(self,data);
+					success.apply(self,arguments);
 				},
 				error:function(e){
-					error.call(self,e);
+					error.apply(self,arguments);
 				}
 			});
 		}

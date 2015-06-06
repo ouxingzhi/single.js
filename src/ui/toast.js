@@ -20,6 +20,14 @@ define(function(require){
 
 	function noop(){}
 
+	function loopPos(num){
+		if(num <= 0 ) return;
+		this.updatePosition();
+		setTimeout(function(){
+			loopPos.call(this,num-1);
+		}.bind(this),20);
+	}
+
 	return UiLayer.extend({
 		propertys:function(){
 			this.doms = {};
@@ -32,6 +40,7 @@ define(function(require){
 			});
 			this.on('show',function(){
 				this.update();
+				loopPos.call(this,3);
 			});
 			this.click = noop;
 			this.content = '';

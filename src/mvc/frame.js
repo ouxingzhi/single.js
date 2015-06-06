@@ -55,7 +55,8 @@ define(function(require, exports, module) {
 			this.viewfoot = this.root.find('.' + CLS_FRAME_FOOT);
 
 			this.header = new MvcHeader({
-				box:this.viewhead
+				box:this.viewhead,
+				frame:this
 			});
 
 			this.name;
@@ -124,6 +125,7 @@ define(function(require, exports, module) {
 		},
 		toView:function(viewname,hashdata){
 			var self = this;
+			
 			this.getView(viewname,hashdata).then(function(resolve,reject,view){
 				self.lastView = self.curView || view;
 				self.curView = view;
@@ -149,12 +151,16 @@ define(function(require, exports, module) {
 				promise.resolve(view);
 			}else{
 				this.loadView(viewname,function(View){
-					var view = new View(viewname,hashdata,this,this.app);
-					this.viewport.append(view.getRoot());
-					view.emit('addframe');
-					this.views.push(viewname,view);
-					view.onCreate();
-					promise.resolve(view);
+					if(View){
+						var view = new View(viewname,hashdata,this,this.app);
+						this.viewport.append(view.getRoot());
+						view.emit('addframe');
+						this.views.push(viewname,view);
+						view.onCreate();
+						promise.resolve(view);
+					}else{
+						throw new Error('not found `'+viewname+'.js`');
+					}
 				});
 			}
 			return promise;
@@ -165,6 +171,9 @@ define(function(require, exports, module) {
 			seajs.use([fullpath],function(View){
 				callback.call(self,View);
 			});
+		},
+		getCurrentView:function(){
+			return this.curView || this.lastView;
 		},
 		buildFullPath:function(viewname){
 			return (this.viewpath + '/' + viewname).replace(/\/+/g,'/') + '.js';
@@ -202,7 +211,8 @@ define(function(require, exports, module) {
 		hideToast:function(){
 			getToast().hide()
 		},
-		showAlert:function(title,content,buttons){
+		showAlert:function(content,buttons,title){
+			
 			getDialog().show({
 				title:title || '标题',
 				content:content || '',
@@ -217,6 +227,12 @@ define(function(require, exports, module) {
 		},
 		hideLoading:function(){
 			getLoading().hide();
+		},
+		showHeader:function(){
+			this.header.show();
+		},
+		hideHeader:function(){
+			this.header.hide();
 		}
 	});
 	return Frame;

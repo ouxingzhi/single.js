@@ -2,19 +2,19 @@ define(function(require, exports, module) {
 	var ModelAbstractModel = require('model/model');
 
 	return ModelAbstractModel.extend({
-		ajaxRequest:function(url,param,success,error){
+		ajaxRequest:function(type,url,param,success,error){
 			var self = this;
 			return $.ajax({
 				url:url,
 				data:JSON.stringify(param),
-				type:'post',
+				type:type || 'post',
 				contentType:'application/json',
 				dataType:'json',
 				success:function(data){
-					success.call(self,data);
+					success.apply(self,arguments)
 				},
 				error:function(e){
-					error.call(self,e);
+					error.apply(self,arguments);
 				}
 			});
 		}

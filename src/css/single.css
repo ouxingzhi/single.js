@@ -122,7 +122,7 @@ html,body{ padding:0px; margin:0px;}
 		opacity:1;
 	}
 	30% {
-		opacity:0.1;
+		opacity:0.3;
 	}
 	to{
 		left:-50%;
@@ -136,7 +136,7 @@ html,body{ padding:0px; margin:0px;}
 		opacity:0;
 	}
 	70% {
-		opacity:0.1;
+		opacity:0.3;
 	}
 	to{
 		left:0%;
@@ -150,7 +150,7 @@ html,body{ padding:0px; margin:0px;}
 		opacity:1;
 	}
 	30% {
-		opacity:0.1;
+		opacity:0.3;
 	}
 	to{
 		left:50%;
@@ -164,7 +164,7 @@ html,body{ padding:0px; margin:0px;}
 		opacity:0;
 	}
 	70% {
-		opacity:0.1;
+		opacity:0.3;
 	}
 	to{
 		left:0%;
@@ -242,23 +242,88 @@ html,body{ padding:0px; margin:0px;}
 
 }
 
-.ui-toast{
+.ui-dialog{
+	width:200px;
+	border-radius:5px;
+}
+.ui-dialog-padding{
+	box-sizing:border-box;
+	padding:5px;
+}
 
+.ui-dialog-head{
+	height:1.5em;
+	line-height:1.5em;
+}
+
+.ui-dialog-content{
+	padding:10px 0px;
+	line-height:1.5em;
+}
+
+.ui-dialog-buttons{
+	text-align:center;
+}
+
+.ui-dialog-buttons button{
+	margin:0px 5px;
+}
+
+.ui-toast{
+	border-radius:5px;
+	padding:10px;
+	max-width:80%;
+	min-width:10%;
 }
 
 .ui-loading{
 	width:100px;
 	height:100px;
 	border-radius:50%;
-	background:#fff;
+	background:rgba(0,0,0,0.2);
 }
 
 .ui-loading:after{
 }
 
+.ui-slide-box{
+	overflow:hidden;
+	height:100%;
+	position:relative;
+}
+.ui-slide-sub-box{
+	height:100%;
+	overflow:hidden;
+	position:absolute;
+	left:0px;
+	top:0px;
+	
+}
+.ui-slide-trans{
+	-webkit-transition:left ease-in 0.2s;
+	transition:left ease-in 0.2s;
+}
+.ui-slide-item{
+	height:100%;
+	float:left;
+}
+.ui-slide-nav{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:100%;
+	text-align:center;
+}
+.ui-slide-nav span{ margin:5px; width:10px; height:10px; border-radius:5px; display:inline-block; background:#999;}
+.ui-slide-nav span.ui-slide-cur-nav{ background:#eee;}
+
 .block-view{ display:none; position:absolute; left:0px; top:0px; width:100%; height:100%; }
 .cur-block-view{ display:block;}
 
+
+
+
+/** loading start **/
 
 .spinner {
   width: 50%;
@@ -273,12 +338,12 @@ html,body{ padding:0px; margin:0px;}
 .container1 > div, .container2 > div, .container3 > div {
   width: 10px;
   height: 10px;
-  background-color: #333;
+  background-color: #fff;
  
   border-radius: 100%;
   position: absolute;
-  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
-  animation: bouncedelay 1.2s infinite ease-in-out;
+  -webkit-animation: bouncedelay 1s infinite ease-in-out;
+  animation: bouncedelay 1s infinite ease-in-out;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -373,4 +438,6 @@ html,body{ padding:0px; margin:0px;}
     -webkit-transform: scale(1.0);
   }
 }
+
+/** loading end **/
 

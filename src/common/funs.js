@@ -25,6 +25,33 @@ define(function(require, exports, module) {
 		}
 	}
 
+	/**
+	 * 创建一个dom
+	 */
+	M.createDOM = function(dom){
+		return function(html){
+			dom.append(html);
+			return dom.children();
+		};
+	}($('<div></div>'));
+
+	/**
+	 * 替换字符串中的的值
+	 */
+	M.formatString = function(str,data,fn,lt,rt){
+		if(!lt) lt = '{';
+		if(!rt) rt = '}';
+		data = data || {};
+		lt = '\\'+lt.split('').join('\\');
+		rt = '\\'+rt.split('').join('\\');
+		var reg = new RegExp(lt+'([^'+lt+rt+']*)'+rt,'img');
+		return str.replace(reg,function(a,b){
+			if(data[b]) return data[b];
+			fn && fn(b);
+			return '';
+		});
+	};
+
 
 	return M;
 });

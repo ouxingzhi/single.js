@@ -46,12 +46,6 @@ define(function(require){
 				click:function(){
 					this.hide();
 				}
-			},
-			{
-				title:'取消',
-				click:function(){
-					this.hide();
-				}
 			}
 		];
 

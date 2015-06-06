@@ -1,8 +1,7 @@
 define(function(require, exports, module) {
 	var Base = require('base/base'),
 		BaseEventObject = require('base/event'),
-		CommonFuns = require('common/funs'),
-		Scroll = require('common/scroll');
+		CommonFuns = require('common/funs');
 
 	var createPageId = function(addSelf){
 		var t = +new Date();
@@ -33,6 +32,9 @@ define(function(require, exports, module) {
 	var View = BaseEventObject.extend({
 		elastic:true,
 		propertys:function(name,hashdata,frame,app){
+			this['$'] = function(s){
+				return this.el.find(s);
+			}.bind(this);
 			this.id = createPageId();
 			this.root = $('<div class="'+CLS_VIEWROOT_BOX+'"><div class="'+CLS_VIEWROOT+'"></div></div>');
 			this.el = this.root.find('.'+CLS_VIEWROOT);
@@ -40,11 +42,6 @@ define(function(require, exports, module) {
 			this.root.hide();
 
 			this.on('addframe',function(){
-				/*this.scroll = new Scroll({
-					box:this.root[0],
-		            elastic:this.elastic,
-		            elasticX:false
-				});*/
 			});
 
 			buildEvents.call(this);
@@ -118,6 +115,12 @@ define(function(require, exports, module) {
 		},
 		hideLoading:function(){
 			this.frame.hideLoading.apply(this.frame,arguments)
+		},
+		showHeader:function(){
+			this.frame.showHeader.apply(this.frame,arguments)
+		},
+		hideHeader:function(){
+			this.frame.hideHeader.apply(this.frame,arguments)
 		}
 	});
 

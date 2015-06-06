@@ -23,6 +23,7 @@ define(function(require){
 
 	return BaseEventObject.extend({
 		propertys:function(){
+			this.frame;
 			this.box;
 			this.forward = false;
 			this.views = {};
@@ -39,6 +40,9 @@ define(function(require){
 			options = options || {};
 			if(!Base.isNUL(options.box)){
 				this.box = options.box;
+			}
+			if(!Base.isNUL(options.frame)){
+				this.frame = options.frame;
 			}
 		},
 		/**
@@ -82,14 +86,13 @@ define(function(require){
 					view.siblings().removeClass(CLS_CURRENT_BLOCK_VIEW);
 					view.addClass(CLS_CURRENT_BLOCK_VIEW);
 				}
-				
-				
-				
 			}
 		},
+		/*
+		 * 用于设置状态 
+		 */
 		setForward:function(forward){
 			this.forward = forward;
-			console.log(this.forward);
 		}
 	});
 });
