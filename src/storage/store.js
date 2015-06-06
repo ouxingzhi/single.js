@@ -15,24 +15,31 @@ define(function(require, exports, module) {
 			key = key.toUpperCase();
 			num = parseInt(num);
 			switch(key){
+				//年
 				case 'Y':
 					i += num * 31536e6;
 					break;
+				//月
 				case 'M':
 					i += num * 2592e6;
 					break;
+				//周
 				case 'W':
 					i += num * 6048e5;
 					break;
+				//天
 				case 'D':
 					i += num * 864e5;
 					break;
+				//小时
 				case 'H':
 					i += num * 36e5;
 					break;
+				//分
 				case 'I':
 					i += num * 6e4;
 					break;
+				//秒
 				case 'S':
 					i += num * 1e3;
 					break;
@@ -75,7 +82,7 @@ define(function(require, exports, module) {
 		},
 		getTag:function(){
 			var meta = this.storage.get(this.name);
-			return meta.tag;
+			return meta && meta.tag;
 		},
 		setAttr:function(path,data,tag){
 			var mdata = this.get() || {};

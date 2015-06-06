@@ -6,7 +6,8 @@ define(function(require, exports, module) {
 		CommonFuns = require('common/funs'),
 		CommonUrlHash = require('common/url.hash'),
 		MvcHeader = require('mvc/header'),
-		MvcTransitionDefault = require('mvc/transition.default');
+		MvcTransitionDefault = require('mvc/transition.default'),
+		MvcTransitionNotAnime = require('mvc/transition.notanime');
 
 		//常用ui组件
 	var UiDialog = require('ui/dialog'),
@@ -71,7 +72,12 @@ define(function(require, exports, module) {
 
 			this.defaultView = 'index';
 
-			this.transtion = MvcTransitionDefault;
+			this.transtions = {
+				'default':MvcTransitionDefault,
+				'notanimte':MvcTransitionNotAnime
+			};
+
+			this.defaultTranstion = 'default';
 
 			this.lastView;
 
@@ -105,8 +111,12 @@ define(function(require, exports, module) {
 				this.defaultView = cfg.defaultView;
 			}
 
-			if(!Base.isNUL(cfg.transtion)){
-				this.transtion = cfg.transtion;
+			if(!Base.isNUL(cfg.transtions)){
+				Base.mix(this.transtions,cfg.transtions);
+			}
+
+			if(!Base.isNUL(cfg.defaultTranstion)){
+				this.defaultTranstion = cfg.defaultTranstion;
 			}
 		},
 		getRoot:function(){
@@ -132,12 +142,12 @@ define(function(require, exports, module) {
 				view.onLoad();
 			});
 		},
-		turning:function(){
+		turning:function(transtype){
 			if(this.curView === this.lastView){
 				this.curView.getRoot().show();
 				this.curView.onShow();
 			}else{
-				this.transferView(this.lastView,this.curView,function(){
+				this.transferView(transtype,this.lastView,this.curView,function(){
 					this.lastView.onHide();
 					this.curView.onShow();
 				});
@@ -178,13 +188,15 @@ define(function(require, exports, module) {
 		buildFullPath:function(viewname){
 			return (this.viewpath + '/' + viewname).replace(/\/+/g,'/') + '.js';
 		},
-		transferView:function(lastView,curView,callback){
+		transferView:function(transtype,lastView,curView,callback){
+			transtype = transtype || this.defaultTranstion;
+			var transtion = this.transtions[transtype] || MvcTransitionDefault;
 			if(this.hashdata.forward){
-				this.transtion.into(lastView.getRoot(),curView.getRoot(),function(){
+				transtion.into(lastView.getRoot(),curView.getRoot(),function(){
 					callback.call(this);
 				},this);
 			}else{
-				this.transtion.out(lastView.getRoot(),curView.getRoot(),function(){
+				transtion.out(lastView.getRoot(),curView.getRoot(),function(){
 					callback.call(this);
 				},this);
 			}

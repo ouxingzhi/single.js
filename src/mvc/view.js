@@ -66,7 +66,7 @@ define(function(require, exports, module) {
 			return this.root;
 		},
 		turning:function(){
-			this.frame.turning();
+			this.frame.turning.apply(this.frame,arguments);
 		},
 		onCreate:function(){
 
@@ -91,9 +91,6 @@ define(function(require, exports, module) {
 		},
 		back:function(){
 			this.app.back.apply(this.app,arguments);
-		},
-		header:function(options){
-			options = options || {};
 		},
 		toHead:function(pageid,options){
 			this.frame.toHead(pageid,options);

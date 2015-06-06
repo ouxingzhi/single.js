@@ -1,7 +1,8 @@
 define(function(require){
 	var Base = require('base/base'),
 		CommonFuns = require('common/funs'),
-		BaseEventObject = require('base/event');
+		BaseEventObject = require('base/event'),
+		TransitionNotAnimte = require('mvc/transition.header.notanimte');
 	function eventinfo(name){
 		var arr = (name || '').replace(/^\s+|\s+$/g,'').split(/\s+/);
 		return {event:arr.shift(),selector:arr.join(' ')};
@@ -50,12 +51,14 @@ define(function(require){
 		 * @param pageid {Number} pageid对应的block
 		 */
 		to:function(pageid,options){
+			options = options || {};
 			var id = this.getPreFix()+pageid;
 			var view = this.box.find('#'+id);
 			if(!view.length){
 				view = $('<div class="'+CLS_BLOCK_VIEW+'" id="'+id+'"></div>');
 				this.box.append(view);
 			}
+			var notAnimte = options.notAnimte || false;
 			if(options.template){
 				var data = options.data || {};
 				var html = _.template(options.template)(data);
@@ -64,26 +67,21 @@ define(function(require){
 					view.off();
 					buildEvents(options.events,view,options.space);
 				}
-
-				if(this.transition){
-					var lastView = view.siblings('.'+CLS_CURRENT_BLOCK_VIEW);
-					if(lastView.length){
-						if(this.forward){
-							this.transition.into(lastView,view,function(){
-								lastView.removeClass(CLS_CURRENT_BLOCK_VIEW);
-								view.addClass(CLS_CURRENT_BLOCK_VIEW);
-							});
-						}else{
-							this.transition.out(lastView,view,function(){
-								lastView.removeClass(CLS_CURRENT_BLOCK_VIEW);
-								view.addClass(CLS_CURRENT_BLOCK_VIEW);
-							});
-						}
+				var transition = notAnimte || !this.transition ? TransitionNotAnimte : this.transition;
+				var lastView = view.siblings('.'+CLS_CURRENT_BLOCK_VIEW);
+				if(lastView.length){
+					if(this.forward){
+						transition.into(lastView,view,function(){
+							lastView.removeClass(CLS_CURRENT_BLOCK_VIEW);
+							view.addClass(CLS_CURRENT_BLOCK_VIEW);
+						});
 					}else{
-						view.addClass(CLS_CURRENT_BLOCK_VIEW);
+						transition.out(lastView,view,function(){
+							lastView.removeClass(CLS_CURRENT_BLOCK_VIEW);
+							view.addClass(CLS_CURRENT_BLOCK_VIEW);
+						});
 					}
 				}else{
-					view.siblings().removeClass(CLS_CURRENT_BLOCK_VIEW);
 					view.addClass(CLS_CURRENT_BLOCK_VIEW);
 				}
 			}

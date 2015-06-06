@@ -129,8 +129,6 @@ define(function(require, exports, module) {
 				var param = this.getParam(),
 					tag = param ? JSON.stringify(param) : null;
 				this.result.set(data,tag);
-			}else{
-				this.result = data;
 			}
 		},
 		
@@ -169,7 +167,7 @@ define(function(require, exports, module) {
 			this.url = this.buildUrl();
 
 			var url = (this.baseurl.replace(/\/+$/g,'') + '/' + this.url.replace(/^\/+/g,'')),
-				param = this.getParam();
+				param = this.getParam() || {};
 			var self = this;
 			//当非get模式时，将允许参数加入到querystring中
 			if(this.type && !this.type.match(/get/i)){
@@ -239,8 +237,50 @@ define(function(require, exports, module) {
 				this._xhr.abort();	
 			}
 			
+		},
+		isLoopStop:{
+			v:false
+		},
+		/**
+		 * 循环请求接口
+		 */
+		loopRequest:function(s,events,space){
+			this.isLoopStop.v = true;
+			this.isLoopStop = {v:false};
+			loop.call(this,this.isLoopStop,s,events,space);
+		},
+		/**
+		 * 停止请求
+		 */
+		endLoopRequest:function(){
+			this.isLoopStop.v = true;
+			this._xhr && this._xhr.abort();
 		}
 	});
-
+	function loop(isLoopStop,s,events,space){
+		if(isLoopStop.v) return;
+		events || events || {};
+		var self = this;
+		var callback = function(){
+			setTimeout(function(){
+				if(isLoopStop.v) return;
+				loop.call(self,isLoopStop,s,events,space);
+			},s*1000);
+		}
+		this.request({
+			success:function(){
+				events.success && events.success.apply(this,arguments);
+				callback()
+			},
+			error:function(){
+				events.error && events.error.apply(this,arguments);
+				callback()
+			},
+			abort:function(){
+				events.abort && events.abort.apply(this,arguments);
+				callback();
+			}
+		},space);
+	}
 	return AbstractModel;
 });

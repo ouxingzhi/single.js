@@ -142,10 +142,18 @@ define(function(require){
 				add(ack,options.cancel,API_P_CANCEL,options.space,options.onlyone);
 				l.push(API_P_CANCEL + '=' + API_APP_SPACE + API_P_CANCEL);
 			}
-			if(typeof options.confirm === 'function'){
-				add(ack,options.confirm,API_P_CONFIRM,options.space,options.onlyone);
-				l.push(API_P_CONFIRM + '=' + API_APP_SPACE + API_P_CONFIRM);
-			}
+
+			add(ack,function(){
+				options.confirm && options.confirm.call(this);
+				clearTimeout(timer);
+			},API_P_CONFIRM,options.space,options.onlyone);
+			l.push(API_P_CONFIRM + '=' + API_APP_SPACE + API_P_CONFIRM);
+
+			var timer = setTimeout(function(){
+				options.timeoutfn && options.timeoutfn.call(options.space);
+				remove(ack);
+			},(options.timeout||30)*1000);
+
 			l.push(API_P_ACK + '=' + ack);
 			
 			return {
