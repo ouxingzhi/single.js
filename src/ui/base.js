@@ -67,5 +67,43 @@ define(function(require, exports, module) {
 			return 'fn_' + addSelf();
 		};
 	}(CommonFuns.createAddSelf());
+
+	M.cssPrefix = function(){
+		if('webkitAudioContext' in window || 'chrome' in window) return '-webkit-';
+		if(navigator.userAgent.match(/firefox/i)) return '-moz-';
+		return '';
+	}();;
+
+	var regTranslate = /translate(x|y|z)\((-?[\w\.]+)\)/img;
+	var regTranslate2 = /translate(?:3d|2d)?\(\s*(-?[\w\.]+)\s*,\s*(-?[\w\.-]+)\s*(?:,\s*(-?[\w\.-]+)\s*)?\)/i;
+	/**
+	 * 获得translate的值
+	 */
+	M.getTranslate = function(dom){
+		var translate = $(dom).css(M.cssPrefix+'transform');
+		var obj={},m;
+		if(translate.match(regTranslate)){
+			translate.replace(regTranslate,function(a,b,c){
+				obj[b] = c;
+			});
+		}else if(m = regTranslate2.exec(translate)){
+			obj.x = m[1];
+			obj.y = m[2];
+			obj.z = m[3];
+		}
+		console.log(obj);
+		return obj
+	};
+	/**
+	 * 设置translate的值
+	 */
+	M.setTranslate = function(dom,obj){
+		var $dom = $(dom);
+		
+		obj = obj || {};
+		var arr = [obj.x||'0px',obj.y||'0px',obj.z||'0px'];
+		$dom.css(M.cssPrefix+'transform','translate3D('+arr.join(',')+')');
+	};
+
 	return M;
 });

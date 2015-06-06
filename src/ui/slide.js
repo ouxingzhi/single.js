@@ -1,4 +1,5 @@
 define(function(require){
+	var UiBase = require('ui/base');
 	var UiObject = require('ui/object');
 	var Base = require('base/base');
 	var CommonFuns = require('common/funs');
@@ -62,12 +63,18 @@ define(function(require){
 				buildEvent.call(this);
 				this.to(this.index);
 			});
+			this.itemWidth = 0;
 			this.length = 0;
 			this.on('sizechange',function(){
-				this.length = this.$el.find('.'+CLS_SLIDE_ITEM).length;
+				var items = this.$el.find('.'+CLS_SLIDE_ITEM);
+				this.length = items.length;
 			});
 			this.on('show',calcSize);
-
+			this.on('show',function(){
+				calcSize.call(this);
+				var items = this.$el.find('.'+CLS_SLIDE_ITEM);
+				this.itemWidth = items.width();
+			});
 			this.items = [];
 
 			this.index = 0;
@@ -102,25 +109,38 @@ define(function(require){
 				case 'touchstart':
 					this.subbox.removeClass(CLS_SLIDE_TRANS);
 					this.tx = t.pageX;
-					this.dx = parseInt(this.subbox.css('left') || 0);
+					this.dx = parseInt(UiBase.getTranslate(this.subbox).x || 0);
 
 					break;
 				case 'touchmove':
 					fx = t.pageX - this.tx;
-					this.subbox.css('left',(this.dx+fx) + 'px');
+					var x = this.dx+fx;
+					console.log(x,this.itemWidth * Math.max(this.length-1,0));
+					if(x > 0){
+						x = 0;
+					}else if(x < -(this.itemWidth * Math.max(this.length-1,0))){
+						x = -(this.itemWidth * Math.max(this.length-1,0));
+					}
+					UiBase.setTranslate(this.subbox,{x:x + 'px',y:'0px',z:'0px'});
 
 					break;
 				case 'touchend':
 				case 'touchcancel':
 					fx = t.pageX - this.tx;
 					this.subbox.addClass(CLS_SLIDE_TRANS);
-					this.subbox.css('left',this.dx+'px');
-					if(Math.abs(fx)<20) return;
-					if(fx>0){
-						this.pre();
-					}else{
-						this.next();
-					}
+					setTimeout(function(){
+						if(Math.abs(fx)<20){
+							UiBase.setTranslate(this.subbox,{x:this.dx + 'px',y:'0px',z:'0px'});
+							return;
+						}
+						if(fx>0){
+							this.pre();
+						}else{
+							this.next();
+						}
+					}.bind(this),0);
+					
+					
 					break;
 			}
 		},
@@ -168,7 +188,8 @@ define(function(require){
 				index = 0;
 			}
 			left = -(this.$el.width() * index);
-			this.$el.find('.'+CLS_SLIDE_SUBBOX).css('left',left + 'px');
+			//this.$el.find('.'+CLS_SLIDE_SUBBOX).css('left',left + 'px');
+			UiBase.setTranslate(this.$el.find('.'+CLS_SLIDE_SUBBOX),{x:left + 'px',y:'0px',z:'0px'});
 			var n = this.$el.find('.'+CLS_SLIDE_NAV).find('span').eq(index);
 			n.addClass(CLS_SLIDE_CUR_NAV);
 			n.siblings().removeClass(CLS_SLIDE_CUR_NAV);
