@@ -13,7 +13,7 @@ body, html {
   -webkit-touch-callout: none;
 }
 /*
- * layout 样式
+ * layout 样式.viewroot
  */
 .layout-main{
 	width:100%;
@@ -53,6 +53,14 @@ body, html {
 .viewroot{ 
 	height:100%;
 	position:relative;
+}
+.viewroot:before{
+	content:'';
+	display:block;
+	clear:both;
+	overflow:hidden;
+	height:0px;
+	width:0px;
 }
 
 /*  */

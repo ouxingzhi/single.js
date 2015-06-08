@@ -139,17 +139,18 @@ define(function(require, exports, module) {
 			this.getView(viewname,hashdata).then(function(resolve,reject,view){
 				self.lastView = self.curView || view;
 				self.curView = view;
-				view.onLoad();
+				view.onLoad(self.lastView.hashdata.view);
 			});
 		},
 		turning:function(transtype){
+			var lastView = this.lastView || this.curView;
 			if(this.curView === this.lastView){
 				this.curView.getRoot().show();
-				this.curView.onShow();
+				this.curView.onShow(lastView.hashdata.view);
 			}else{
 				this.transferView(transtype,this.lastView,this.curView,function(){
 					this.lastView.onHide();
-					this.curView.onShow();
+					this.curView.onShow(lastView.hashdata.view);
 				});
 			}
 		},
