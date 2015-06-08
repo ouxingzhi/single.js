@@ -1,6 +1,7 @@
 define(function(require){
 		//以下主要是给js掉app的回调
-	var API_URL_PROTOCOL = 'ttpodsmm://',
+
+	var API_URL_PROTOCOL = 'ttpodsmm',
 		API_URL_JS_REQUEST = 'js_request',
 		API_APP_SPACE = 'app.',
 		API_P_SERVICE = 'service',
@@ -157,12 +158,16 @@ define(function(require){
 			l.push(API_P_ACK + '=' + ack);
 			
 			return {
-				url:API_URL_PROTOCOL + API_URL_JS_REQUEST + '?' + l.join('&'),
+				url:API_URL_PROTOCOL + '://' + API_URL_JS_REQUEST + '?' + l.join('&'),
 				ack:ack
 			};
 		}
 
 		return {
+			setProtocol:function(head){
+				API_URL_PROTOCOL = head;
+			},
+
 			/**
 			 * 用于创建一个回调函数，返回一个ack
 			 * @param fn {Function} 要执行的回调
