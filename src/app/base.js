@@ -1,6 +1,6 @@
 define(function(require){
 		//以下主要是给js掉app的回调
-	var API_URL_PROTOCOL = 'ttpod://',
+	var API_URL_PROTOCOL = 'ttpodsmm://',
 		API_URL_JS_REQUEST = 'js_request',
 		API_APP_SPACE = 'app.',
 		API_P_SERVICE = 'service',
