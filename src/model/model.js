@@ -75,7 +75,7 @@ define(function(require, exports, module) {
 					return this.param.get();
 				}
 			}else{
-				return this.param;
+				return JSON.parse(JSON.stringify(this.param));
 			}
 		},
 		/**
@@ -169,6 +169,7 @@ define(function(require, exports, module) {
 			var url = (this.baseurl.replace(/\/+$/g,'') + '/' + this.url.replace(/^\/+/g,'')),
 				param = this.getParam() || {};
 			var self = this;
+			var delkeys = [];
 			//当非get模式时，将允许参数加入到querystring中
 			if(this.type && !this.type.match(/get/i)){
 				var sf = url.indexOf('?') > -1 ? '&' : '?',
@@ -194,7 +195,7 @@ define(function(require, exports, module) {
 				
 			}
 			//将参数添加到url中
-			var delkeys = [];
+			
 			if(url.match(preg)){
 				url = CommonFuns.formatString(url,param||{},function(key){
 					delkeys.push(key);

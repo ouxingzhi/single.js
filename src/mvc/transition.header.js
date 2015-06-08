@@ -21,14 +21,12 @@ define(function(require, exports, module) {
 			MvcTransitionInterface.addTransitionEnd(inel,function(){
 				inel.removeClass(TRANS_FORWARD_IN);
 				callback && callback.call(space);
-				console.log('into_in');
 			});
 			
 			MvcTransitionInterface.removeTransitionEnd(outel);
 			MvcTransitionInterface.addTransitionEnd(outel,function(){
 				outel.hide();
 				outel.removeClass(TRANS_FORWARD_OUT);
-				console.log('into_out');
 			});
 		},
 		out:function(outel,inel,callback,space){
@@ -44,7 +42,6 @@ define(function(require, exports, module) {
 			MvcTransitionInterface.removeTransitionEnd(inel);
 			MvcTransitionInterface.addTransitionEnd(inel,function(){
 				inel.removeClass(TRANS_BACK_IN);
-				console.log('out_in');
 			});
 			
 			MvcTransitionInterface.removeTransitionEnd(outel);
@@ -52,7 +49,6 @@ define(function(require, exports, module) {
 				outel.hide();
 				outel.removeClass(TRANS_BACK_OUT);
 				callback && callback.call(space);
-				console.log('out_out');
 			});
 		},
 		isAnimation:function(el){

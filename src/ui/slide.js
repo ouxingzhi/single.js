@@ -115,7 +115,6 @@ define(function(require){
 				case 'touchmove':
 					fx = t.pageX - this.tx;
 					var x = this.dx+fx;
-					console.log(x,this.itemWidth * Math.max(this.length-1,0));
 					if(x > 0){
 						x = 0;
 					}else if(x < -(this.itemWidth * Math.max(this.length-1,0))){

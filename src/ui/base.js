@@ -91,7 +91,6 @@ define(function(require, exports, module) {
 			obj.y = m[2];
 			obj.z = m[3];
 		}
-		console.log(obj);
 		return obj
 	};
 	/**

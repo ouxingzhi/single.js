@@ -72,22 +72,23 @@ define(function(require, exports, module) {
 				}
 			},this);
 		},
-		onHashChange:function(data,notChangeUrl){
+		onHashChange:function(data,replace){
 			var frame = data.frame || this.config.defaultFrame;
-			data.forward = this.checkForward(data,notChangeUrl);
+			data.forward = this.checkForward(data);
+			if(replace){
+				var hash = '#' + data.buildUrl();
+				history.replaceState({},'',hash);
+			}
 			if(this.frames[frame]){
 				this.frames[frame].hashChange(data);
 			}
-
 		},
-		checkForward:function(data,notChangeUrl){
+		checkForward:function(data){
 			var index,hash;
 			if(this.forwardId && (index = data.ids.indexOf(this.forwardId)) > -1){
-				if(!notChangeUrl){
-					data.ids.splice(index,1);
-					hash = '#' + data.buildUrl();
-					history.replaceState({},'',hash);
-				}
+				data.ids.splice(index,1);
+				hash = '#' + data.buildUrl();
+				history.replaceState({},'',hash);
 				return true;
 			}
 			return false;
@@ -114,8 +115,9 @@ define(function(require, exports, module) {
 		},
 		replace:function(url){
 			var hash = url + '|' + this.forwardId;
-			var hashdata = new CommonUrlHash(hash);
-			this.onHashChange(hashdata,true);
+			//var hashdata = new CommonUrlHash(hash);
+			//this.onHashChange(hashdata,true);
+			location.replace('#'+hash);
 		},
 		back:function(url){
 			if(url){
