@@ -46,11 +46,11 @@ define(function(require, exports, module) {
 		rt = '\\'+rt.split('').join('\\');
 		var reg = new RegExp(lt+'([^'+lt+rt+']*)'+rt,'img');
 		return str.replace(reg,function(a,b){
-			if(data[b]){
+			if(!Base.isNUL(data[b])){
 				fn && fn(b);
 				return data[b];
 			}
-			return '';
+			return '0';
 		});
 	};
 
