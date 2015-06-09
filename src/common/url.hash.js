@@ -9,7 +9,7 @@ define(function(require, exports, module) {
 
 	function buildQuery(o){
 		var u = [];
-		Base.each(o,function(n,v){
+		Base.each(o,function(v,n){
 			u.push(encodeURIComponent(n) + '=' + encodeURIComponent(v));
 		});
 		return u.join('&');

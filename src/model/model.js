@@ -246,6 +246,11 @@ define(function(require, exports, module) {
 		 * 循环请求接口
 		 */
 		loopRequest:function(s,events,space){
+			if(typeof s === 'object'){
+				space = events;
+				events = s;
+				s = 5;
+			}
 			this.isLoopStop.v = true;
 			this.isLoopStop = {v:false};
 			loop.call(this,this.isLoopStop,s,events,space);
