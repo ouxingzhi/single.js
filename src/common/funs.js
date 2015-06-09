@@ -54,6 +54,17 @@ define(function(require, exports, module) {
 		});
 	};
 
+	/**
+	 * 获得懒执行结果
+	 */
+	M.createLazyValue = function(fn,space){
+		var value = null;
+		return function(){
+			if(value != null) return value;
+			return value = fn.apply(space,arguments);
+		};
+	};
+
 
 	return M;
 });
