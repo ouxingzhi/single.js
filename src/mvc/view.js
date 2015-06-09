@@ -124,6 +124,9 @@ define(function(require, exports, module) {
 		},
 		hideHeader:function(){
 			this.frame.hideHeader.apply(this.frame,arguments)
+		},
+		getHeaderRoot:function(){
+			return this.frame.header.getRoot();
 		}
 	});
 

@@ -86,6 +86,9 @@ define(function(require){
 				}
 			}
 		},
+		getRoot:function(){
+			return this.box;
+		},
 		/*
 		 * 用于设置状态 
 		 */
