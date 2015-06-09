@@ -1,7 +1,7 @@
 /*
  * 基础样式
  */
-html,body{ padding:0px; margin:0px;}
+html,body,p,h1,h2,h3,h4,h5,ul,ol,li{ padding:0px; margin:0px;}
 body, html {
   position: relative;
   height: 100%;
