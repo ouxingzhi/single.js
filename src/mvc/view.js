@@ -58,11 +58,11 @@ define(function(require, exports, module) {
 
 
 		},
-		$P:function(index){
-			return this.hashdata.path[index] || null;
+		$P:function(index,defval){
+			return this.hashdata.path[index] || defval;
 		},
-		$Q:function(key){
-			return this.hashdata.query[key] || null;
+		$Q:function(key,defval){
+			return this.hashdata.query[key] || defval;
 		},
 		setHashData:function(hashdata){
 			this.hashdata = hashdata;
