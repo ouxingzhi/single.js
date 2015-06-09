@@ -2,6 +2,7 @@
  * 基础样式
  */
 html,body,p,h1,h2,h3,h4,h5,ul,ol,li{ padding:0px; margin:0px;}
+ul,ol,li{ list-style:none; }
 body, html {
   position: relative;
   height: 100%;
