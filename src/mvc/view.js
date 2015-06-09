@@ -59,10 +59,10 @@ define(function(require, exports, module) {
 
 		},
 		$P:function(index,defval){
-			return this.hashdata.path[index] || defval;
+			return this.hashdata.path[index] || defval; 
 		},
 		$Q:function(key,defval){
-			return this.hashdata.query[key] || defval;
+			return this.hashdata.query[key] || defval; 
 		},
 		setHashData:function(hashdata){
 			this.hashdata = hashdata;
