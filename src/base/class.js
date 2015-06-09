@@ -132,6 +132,18 @@ define(function(require, exports, module) {
 			return this.instance;
 		}
 
+		/**
+		 * 创建惰性new的方法
+		 * @return {Function}
+		 */
+		Class.createLazyFun = function(){
+			var instance,self = this;
+			return function(){
+				if(instance) return instance;
+				return instance = self.getInstance();
+			}	
+		};
+
 		return Class;
 
 	}
