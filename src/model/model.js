@@ -146,6 +146,7 @@ define(function(require, exports, module) {
 			var success = events.success || noop,
 				error = events.error || noop,
 				abort = events.abort || noop,
+				complete = events.complete || noop,
 				result;
 
 			
@@ -161,6 +162,7 @@ define(function(require, exports, module) {
 				this.on('success',success,space);
 				this.on('error',error,space);
 				this.on('abort',abort,space);
+				this.on('complete',complete,space);
 				if(this.state === MODEL_STATE_LOADING) return;
 			}
 			this.baseurl = this.buildBaseUrl();
@@ -215,6 +217,7 @@ define(function(require, exports, module) {
 					self.emit('error',data);
 					self.state = MODEL_STATE_INIT;
 				}
+				self.emit('complete');
 				clearEvents.call(self);
 				this.isAbort = false;
 			},function(e){
@@ -223,6 +226,7 @@ define(function(require, exports, module) {
 				}else{
 					self.emit('error',e);
 				}
+				self.emit('complete');
 				self.state = MODEL_STATE_INIT;
 				clearEvents.call(self);
 				this.isAbort = false;
