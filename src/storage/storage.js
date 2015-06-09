@@ -27,6 +27,9 @@ define(function(require, exports, module) {
 		getAttr:function(name,path){
 			var data = this.get(name) || {};
 			return Base.path(data,path);
+		},
+		remove:function(name){
+			this.proxy.removeItem(name);
 		}
 	});
 })

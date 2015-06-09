@@ -99,6 +99,9 @@ define(function(require, exports, module) {
 		getAttr:function(path,tag){
 			return Base.path(this.get(tag),path);
 		},
+		remove:function(){
+			this.storage.remove(this.name);
+		},
 		buildName:function(){
 			throw "Please override the `buildName` method";
 		},
