@@ -4,6 +4,7 @@ define(function(require) {
 		BaseEvent = require('base/event'),
 		CommonFuns = require('common/funs');
 	var CLASS_ROOT = 'ui-root';
+	var $window = $(window);
 	var UiObject = BaseEvent.extend({
 		propertys:function(){
 			this.uiId = UiBase.createUiId();
