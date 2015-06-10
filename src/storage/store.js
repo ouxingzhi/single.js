@@ -86,6 +86,7 @@ define(function(require, exports, module) {
 		},
 		setAttr:function(path,data,tag){
 			var mdata = this.get() || {};
+			if(data === undefined) data = null;
 			Base.path(mdata,path,data);
 			tag = tag || this.getTag();
 			this.set(mdata,tag);
