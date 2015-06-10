@@ -74,13 +74,14 @@ define(function(require){
 				var items = this.$el.find('.'+CLS_SLIDE_ITEM);
 				this.itemWidth = items.width();
 				this.startAutoPosition();
-				
+
 			});
 			this.on('hide',function(){
 				this.endAutoPosition();
 			});
 			this.on('resize',function(){
 				calcSize.call(this);
+				this.to(this.index);
 			})
 
 			this.items = [];
