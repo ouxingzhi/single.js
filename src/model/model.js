@@ -280,15 +280,16 @@ define(function(require, exports, module) {
 		this.request({
 			success:function(){
 				events.success && events.success.apply(this,arguments);
-				callback()
 			},
 			error:function(){
 				events.error && events.error.apply(this,arguments);
-				callback()
 			},
 			abort:function(){
 				events.abort && events.abort.apply(this,arguments);
-				callback();
+			},
+			complete:function(){
+				events.complete && events.complete.apply(this,arguments);
+				callback()
 			}
 		},space);
 	}
