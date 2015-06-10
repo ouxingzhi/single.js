@@ -2,7 +2,7 @@ define(function(require, exports, module) {
 	var Base = require('base/base'),
 		BaseObject = require('base/object');
 
-	var hashreg = /^(?:([^:\/!?&=|]+):)?([^!?&|]+)?(?:!([^!?&|]+))?(?:\?((?:[^?=&|]+=[^?=&|]+(?:&[^?=&|]+=[^?=&|]+)*)?))?((?:\|[^|]+)*)?$/i,
+	var hashreg = /^(?:([^:\/!?&=|]+):)?([^!?&|]+)?(?:!([^!?&|]+))?(?:\?((?:[^?=&|]+=[^?=&|]*(?:&[^?=&|]+=[^?=&|]*)*)?))?((?:\|[^|]+)*)?$/i,
 		queryStringReg = /([^=&]*)=([^=&]*)/g;
 	var ID = {};
 	var allowPropertys = {path:ID,paths:ID,search:ID,searchs:ID};
