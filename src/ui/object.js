@@ -13,6 +13,10 @@ define(function(require) {
 			this.useRoot = true;
 			//容器
 			this.container = null;
+			//自动定位的回调
+			this.__autoFnName = this.randFn(function(){
+				this.emit('resize');
+			});
 		},
 		initialize:function($super,options){
 			$super(options);
@@ -95,7 +99,14 @@ define(function(require) {
 				this.status = UiObject.STATUS_DESTROY;
 				this.emit('destroy');
 			}
-		}
+		},
+		startAutoPosition:function(){
+			if(this[this.__autoFnName]) $window.off('resize',this[this.__autoFnName]);
+			$window.on('resize',this[this.__autoFnName]);
+		},
+		endAutoPosition:function(){
+			$window.off('resize',this[this.__autoFnName]);
+		},
 	});
 	//没有创建
 	UiObject.STATUS_NOT_CREATE = 0;

@@ -48,10 +48,7 @@ define(function(require){
 				}
 				this.endAutoPosition();
 			});
-			//自动定位的回调
-			this.__autoFnName = this.randFn(function(){
-				this.emit('resize');
-			});
+			
 			this.on('resize',function(){
 				this.updatePosition();
 			});
@@ -107,12 +104,6 @@ define(function(require){
 		},
 		createHTML:function(){
 			return '';
-		},
-		startAutoPosition:function(){
-			$window.on('resize',this[this.__autoFnName]);
-		},
-		endAutoPosition:function(){
-			$window.off('resize',this[this.__autoFnName]);
 		},
 		show:function($super,options){
 			if(options && !Base.isNUL(options.maskOpacity)){
