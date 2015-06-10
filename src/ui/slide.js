@@ -70,10 +70,11 @@ define(function(require){
 				this.length = items.length;
 			});
 			this.on('show',function(){
-				
+				calcSize.call(this);
 				var items = this.$el.find('.'+CLS_SLIDE_ITEM);
 				this.itemWidth = items.width();
 				this.startAutoPosition();
+				
 			});
 			this.on('hide',function(){
 				this.endAutoPosition();
