@@ -17,10 +17,14 @@ define(function(require){
 		API_URL_JS_CANCEL = 'js_cancel',
 		API_URL_JS_CONFIRM = 'js_confirm';
 
-	function getBody(){
-		var b = document.getElementsByTagName('body');
-		return b && b[0];
-	}
+	var getBody = function(){
+		var b;
+		return function(){
+			if(b) return b;
+			var c = document.getElementsByTagName('body');
+			return b = c && c[0];
+		}
+	}()
 	//发送消息
 	function send(src){
 		var ifr = document.createElement('iframe');
