@@ -5,7 +5,7 @@ define(function(require){
 	 * @author xinzhi.oxz/安顿
 	 */
 
-	var Event = require('common/event');
+	var Event = require('base/event');
 
 	var regline = /[\r\n]+/,
 		regmeta = /^\[(ti|ar|al|by|offset):([^\[\]]*)\]$/,

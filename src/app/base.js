@@ -26,7 +26,8 @@ define(function(require){
 		}
 	}()
 	//发送消息
-	function send(src){
+	var defaultSend;
+	var send = defaultSend = function(src){
 		var ifr = document.createElement('iframe');
 		ifr.src = src;
 		ifr.style.display = 'none';
@@ -168,6 +169,17 @@ define(function(require){
 		}
 
 		return {
+			/**
+			 * 设置发送消息的方法
+			 * @param fn {Function} 发送方法 为空则为使用默认
+			 */
+			setSendHandle:function(fn){
+				if(fn){
+					send = fn;
+				}else{
+					send = defaultSend;
+				}
+			},
 			setProtocol:function(head){
 				API_URL_PROTOCOL = head;
 			},
