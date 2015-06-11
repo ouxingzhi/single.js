@@ -9,7 +9,7 @@ define(function(require){
 	 * 
 	 */
 	
-	var $window = $(window);
+	
 	return UiObject.extend({
 		propertys:function(){
 
