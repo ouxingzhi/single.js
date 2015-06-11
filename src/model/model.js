@@ -15,6 +15,7 @@ define(function(require, exports, module) {
 		this.off('success');
 		this.off('error');
 		this.off('abort');
+		this.off('complete');
 	};
 
 	var preg = /\{[^\{\}]*\}/;
