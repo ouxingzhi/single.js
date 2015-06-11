@@ -36,7 +36,7 @@ define(function(require){
 			setTimeout(function(){
 				body.removeChild(ifr);
 				ifr = null;
-			},1000);
+			},500);
 		}
 	}
 	//创建回调
