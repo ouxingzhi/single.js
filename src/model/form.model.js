@@ -3,7 +3,7 @@ define(function(require, exports, module) {
 
 	return ModelAbstractModel.extend({
 		propertys:function(){
-
+			this.dataType = 'json';
 		},
 		ajaxRequest:function(type,url,param,success,error){
 			var self = this;
@@ -11,7 +11,7 @@ define(function(require, exports, module) {
 				url:url,
 				data:param,
 				type:type,
-				dataType:'json',
+				dataType:this.dataType,
 				success:function(data){
 					success.apply(self,arguments);
 				},
