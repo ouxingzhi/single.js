@@ -276,7 +276,6 @@ define(function(require, exports, module) {
 		var callback = function(){
 			setTimeout(function(){
 				if(isLoopStop.v) return;
-				console.log(Math.random());
 				loop.call(self,isLoopStop,s,events,space);
 			},s*1000);
 		}
