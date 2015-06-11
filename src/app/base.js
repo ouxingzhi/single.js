@@ -32,7 +32,7 @@ define(function(require){
 			setTimeout(function(){
 				body.removeChild(ifr);
 				ifr = null;
-			},0);
+			},500);
 		}
 	}
 	//创建回调
