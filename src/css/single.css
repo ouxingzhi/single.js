@@ -118,26 +118,26 @@ body, html {
  * 向前的离开
  */
 .default_forward_out{
-	-webkit-animation:default_forward_out .5s forwards ;
+	-webkit-animation:default_forward_out .3s forwards ;
 
 }
 /**
  * 向前的进入
  */
 .default_forward_in{
-	-webkit-animation:default_forward_in .5s forwards;
+	-webkit-animation:default_forward_in .3s forwards;
 }
 /**
  * 返回的离开
  */
 .default_back_out{
-	-webkit-animation:default_back_out .5s forwards ;
+	-webkit-animation:default_back_out .3s forwards ;
 }
 /**
  * 返回的进入
  */
 .default_back_in{
-	-webkit-animation:default_back_in .5s forwards;
+	-webkit-animation:default_back_in .3s forwards;
 }
 
 /** header 动画 **/
@@ -201,26 +201,26 @@ body, html {
  * 向前的离开
  */
 .header_forward_out{
-	-webkit-animation:header_forward_out .5s ease ;
+	-webkit-animation:header_forward_out .3s ease ;
 
 }
 /**
  * 向前的进入
  */
 .header_forward_in{
-	-webkit-animation:header_forward_in .5s ease;
+	-webkit-animation:header_forward_in .3s ease;
 }
 /**
  * 返回的离开
  */
 .header_back_out{
-	-webkit-animation:header_back_out .5s ease ;
+	-webkit-animation:header_back_out .3s ease ;
 }
 /**
  * 返回的进入
  */
 .header_back_in{
-	-webkit-animation:header_back_in .5s ease;
+	-webkit-animation:header_back_in .3s ease;
 }
 
 
