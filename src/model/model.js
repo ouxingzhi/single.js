@@ -208,25 +208,26 @@ define(function(require, exports, module) {
 			}
 			this.isAbort = false;
 			this.state = MODEL_STATE_LOADING;
+			var me = this;
 			this._xhr = this.ajaxRequest(this.type,url,param,function(data){
 				if(self.verifyData(data)){
 					self.setResult(data);
-					self.emit('success',data);
+					self.emit('success',data,me._xhr);
 					self.state = MODEL_STATE_SUCCESS;
 				}else{
-					self.emit('error',data);
+					self.emit('error',data,me._xhr);
 					self.state = MODEL_STATE_INIT;
 				}
-				self.emit('complete');
+				self.emit('complete',me._xhr);
 				clearEvents.call(self);
 				this.isAbort = false;
 			},function(e){
 				if(this.isAbort){
-					self.emit('abort',e);
+					self.emit('abort',e,me._xhr);
 				}else{
-					self.emit('error',e);
+					self.emit('error',e,me._xhr);
 				}
-				self.emit('complete');
+				self.emit('complete',me._xhr);
 				self.state = MODEL_STATE_INIT;
 				clearEvents.call(self);
 				this.isAbort = false;
