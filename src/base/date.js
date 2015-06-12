@@ -113,7 +113,7 @@ define(function(require){
 		return new Date(Date.parse(str.replace(/-/g,'/')));
 	}
 	/**
-	 * 计算两个时间之间差值
+	 * 计算两个时间之间差值，返回入
 	 */
 	var D = 864e5,H = 36e5,I = 6e4;
 	DDate.diffFormat = function(a,base){

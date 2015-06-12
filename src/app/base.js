@@ -124,7 +124,7 @@ define(function(require){
 			cancels[ack] && delRef(cancels[ack]);
 			delete cancels[ack];
 			confirms[ack] && delRef(confirms[ack]);
-			delete confirm[ack];
+			delete confirms[ack];
 		}
 
 		function createUrl(service,params,options){
