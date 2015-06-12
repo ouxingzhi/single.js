@@ -224,12 +224,13 @@ define(function(require, exports, module) {
 		hideToast:function(){
 			getToast().hide()
 		},
-		showAlert:function(content,buttons,title){
-			
+		showAlert:function(content,buttons,title,showTitle){
+
 			getDialog().show({
 				title:title || '标题',
 				content:content || '',
-				buttons:buttons
+				buttons:buttons,
+				hideTitle:!showTitle
 			});
 		},
 		hideAlert:function(){
