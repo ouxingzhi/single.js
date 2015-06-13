@@ -70,9 +70,7 @@ define(function(require, exports, module) {
 	}(CommonFuns.createAddSelf());
 
 	M.cssPrefix = function(){
-		if('webkitAudioContext' in window || 'chrome' in window) return '-webkit-';
-		if(navigator.userAgent.match(/firefox/i)) return '-moz-';
-		return '';
+		return '-webkit-';
 	}();;
 
 	var regTranslate = /translate(x|y|z)\((-?[\w\.]+)\)/img;
