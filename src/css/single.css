@@ -306,9 +306,9 @@ body, html {
 	height:100px;
 	border-radius:50%;
 	border:2px solid #fff;
-	border-width:0px 0px 2px 2px;
+	border-width:0px 0px 0px 2px;
 	background:rgba(0,0,0,0.2);
-	-webkit-animation:loading_rotate 2s ease;
+	-webkit-animation:loading_rotate 2s linear infinite;
 }
 
 @-webkit-keyframes loading_rotate{
