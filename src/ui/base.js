@@ -103,7 +103,7 @@ define(function(require, exports, module) {
 		obj = obj || {};
 		var arr = [obj.x||'0px',obj.y||'0px',obj.z||'0px'];
 		$dom.css(M.cssPrefix+'transform','translate3D('+arr.join(',')+')');
-		L.log($dom.attr('style'));
+		L.log(M.cssPrefix+'transform:'+'translate3D('+arr.join(',')+')');
 	};
 
 	return M;
