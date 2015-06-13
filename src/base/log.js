@@ -32,12 +32,12 @@ define(function(){
 		log:function(msg,tag){
 			if(!isdebug()) return;
 			if(!tag) tag = 'default';
-			write(tag + ': ' + msg);
+			I.write(tag + ': ' + msg);
 		},
 		err:function(msg,tag){
 			if(!isdebug()) return;
 			if(!tag) tag = 'default';
-			write(tag + ': ' + msg,true);
+			I.write(tag + ': ' + msg,true);
 		}
 	};
 });
