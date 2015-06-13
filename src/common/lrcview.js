@@ -6,6 +6,7 @@ define(function(require){
 	 */
 
 	var Lrc = require('common/lrc');
+	var UiBase = require('ui/base');
 
 
 	var LrvView = Lrc.extend({
@@ -98,10 +99,11 @@ define(function(require){
 				li.siblings().removeClass('cur');
 				li.addClass('cur');
 				if(li.length){
-					this.subbox.css({
+					/*this.subbox.css({
 						left:'0px',
 						top:(-li[0].offsetTop+bh-li.height()/2 + this.offset) + 'px'
-					});
+					});*/
+					UiBase.setTranslate(this.subbox,{x:'0px',y:(-li[0].offsetTop+bh-li.height()/2 + this.offset) + 'px'})
 				}
 				
 			}
