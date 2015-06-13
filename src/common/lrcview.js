@@ -55,6 +55,7 @@ define(function(require){
 				top:'0px'
 			});
 			this.box.append(this.subbox);
+			this.wraper.empty();
 			this.wraper.append(this.box);
 		},
 		_stopAnima:function(){
