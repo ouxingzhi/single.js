@@ -1,7 +1,6 @@
 define(function(require, exports, module) {
 	var base = require('base/base'),
-		CommonFuns = require('common/funs'),
-		L = require('base/log');
+		CommonFuns = require('common/funs');
 	var M = {};
 
 	/**
@@ -101,7 +100,6 @@ define(function(require, exports, module) {
 		obj = obj || {};
 		var arr = [obj.x||'0px',obj.y||'0px',obj.z||'0px'];
 		$dom.css(M.cssPrefix+'transform','translate3D('+arr.join(',')+')');
-		L.log(M.cssPrefix+'transform:'+'translate3D('+arr.join(',')+')');
 	};
 
 	return M;
