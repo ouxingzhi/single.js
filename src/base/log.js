@@ -29,12 +29,8 @@ define(function(){
 			}
 		};
 	}();
-	var onerror = window.onerror;
-	window.onerror = function(e){
-		IO.err(String(e));
-	};
-	var IO;
-	return IO = {
+	
+	var IO = {
 		log:function(msg,tag){
 			if(!isdebug()) return;
 			if(!tag) tag = 'default';
@@ -46,4 +42,10 @@ define(function(){
 			I.write(tag + ': ' + msg,true);
 		}
 	};
+	var onerror = window.onerror;
+	window.onerror = function(e){
+		IO.err(String(e));
+		if(typeof onerror == 'function') onerror.apply(this,arguments);
+	};
+	return IO;
 });
