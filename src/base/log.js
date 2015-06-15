@@ -8,7 +8,7 @@ define(function(){
 			if(!d){
 				d = document.createElement('div');
 				document.body.appendChild(d);
-				d.style.cssText = 'z-index:8000;color:#fff;position:absolute;left:0px;bottom:0px;width:100%;height:3em;font-size:12px;background:rgba(0,0,0,0.8);padding:10px 0px;overflow:hidden;';
+				d.style.cssText = 'z-index:8000;color:#fff;position:absolute;left:0px;bottom:0px;width:100%;height:3em;font-size:12px;background:rgba(0,0,0,0.8);padding:10px 0px;overflow:auto;';
 			}
 			return d;
 		}
