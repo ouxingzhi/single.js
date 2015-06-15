@@ -12,6 +12,7 @@ define(function(){
 			}
 			return d;
 		}
+
 		return {
 			hide:function(){
 				if(d){
@@ -28,7 +29,12 @@ define(function(){
 			}
 		};
 	}();
-	return {
+	var onerror = window.onerror;
+	window.onerror = function(e){
+		IO.err(String(e));
+	};
+	var IO;
+	return IO = {
 		log:function(msg,tag){
 			if(!isdebug()) return;
 			if(!tag) tag = 'default';
