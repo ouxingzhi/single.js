@@ -114,11 +114,50 @@ body, html {
 	}
 }
 
+/*********/
+
+@keyframes default_forward_out{
+	from{
+		transform:translate3d(0%,0,0);
+	}
+	to{
+		transform:translate3d(-100%,0,0);
+	}
+}
+
+@keyframes default_forward_in{
+	from{
+		transform:translate3d(100%,0px,0px);
+	}
+	to{
+		transform:translate3d(0%,0px,0px);
+	}
+}
+
+@keyframes default_back_out{
+	from{
+		transform:translate3d(0%,0px,0px);
+	}
+	to{
+		transform:translate3d(100%,0px,0px);
+	}
+}
+
+@keyframes default_back_in{
+	from{
+		transform:translate(-100%,0px);
+	}
+	to{
+		transform:translate(0%,0px);
+	}
+}
+
 /**
  * 向前的离开
  */
 .default_forward_out{
 	-webkit-animation:default_forward_out .3s forwards ;
+	animation:default_forward_out .3s forwards ;
 
 }
 /**
@@ -126,18 +165,21 @@ body, html {
  */
 .default_forward_in{
 	-webkit-animation:default_forward_in .3s forwards;
+	animation:default_forward_in .3s forwards;
 }
 /**
  * 返回的离开
  */
 .default_back_out{
 	-webkit-animation:default_back_out .3s forwards ;
+	animation:default_back_out .3s forwards ;
 }
 /**
  * 返回的进入
  */
 .default_back_in{
 	-webkit-animation:default_back_in .3s forwards;
+	animation:default_back_in .3s forwards;
 }
 
 /** header 动画 **/
@@ -197,30 +239,90 @@ body, html {
 	}
 }
 
+/***********/
+@keyframes header_forward_out{
+	from{
+		transform:translate3d(0%,0,0);
+		opacity:1;
+	}
+	30% {
+		opacity:0.3;
+	}
+	to{
+		transform:translate3d(-50%,0,0);
+		opacity:0;
+	}
+}
+
+@keyframes header_forward_in{
+	from{
+		transform:translate3d(50%,0,0);
+		opacity:0;
+	}
+	70% {
+		opacity:0.3;
+	}
+	to{
+		transform:translate3d(0%,0,0);
+		opacity:1;
+	}
+}
+
+@keyframes header_back_out{
+	from{
+		transform:translate3d(0%,0,0);
+		opacity:1;
+	}
+	30% {
+		opacity:0.3;
+	}
+	to{
+		transform:translate3d(50%,0,0);
+		opacity:0;
+	}
+}
+
+@keyframes header_back_in{
+	from{
+		transform:translate3d(-50%,0,0);
+		opacity:0;
+	}
+	70% {
+		opacity:0.3;
+	}
+	to{
+		transform:translate3d(0%,0,0);
+		opacity:1;
+	}
+}
+
 /**
  * 向前的离开
  */
 .header_forward_out{
 	-webkit-animation:header_forward_out .3s ease ;
-
+	animation:header_forward_out .3s ease ;
 }
 /**
  * 向前的进入
  */
 .header_forward_in{
 	-webkit-animation:header_forward_in .3s ease;
+	animation:header_forward_in .3s ease;
 }
 /**
  * 返回的离开
  */
 .header_back_out{
 	-webkit-animation:header_back_out .3s ease ;
+	animation:header_back_out .3s ease ;
 }
 /**
  * 返回的进入
  */
 .header_back_in{
 	-webkit-animation:header_back_in .3s ease;
+	animation:header_back_in .3s ease;
 }
 
 
