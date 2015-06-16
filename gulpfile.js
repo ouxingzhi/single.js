@@ -9,7 +9,7 @@ var r = require('gulp-seajs-r');
 
 var src = './src';
 
-var build = './build'
+var build = './build2'
 
 // gulp.task('default',function(){
 // 	return gulp.src(src + '/**',{base:'./src'})
@@ -46,7 +46,7 @@ gulp.task('build.pack.js',['clean'],function(){
 gulp.task('minify.css',['clean'],function(){
 	return gulp.src(src + '/**/*.css')
 		.pipe(minifycss())
-		.pipe(gulp.dest('./build'));
+		.pipe(gulp.dest(build));
 });
 
 gulp.task('clean',function(){
