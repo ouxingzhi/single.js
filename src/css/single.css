@@ -54,6 +54,7 @@ body, html {
 .viewroot{ 
 	height:100%;
 	position:relative;
+	z-index:10;
 }
 .viewroot:before{
 	content:'';
@@ -72,6 +73,15 @@ body, html {
 	top:0px;
 	left:0px;
 	z-index:100;
+}
+
+.viewroot-bg{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	z-index:5;
 }
 
 .single-header-hide .viewroot-box{

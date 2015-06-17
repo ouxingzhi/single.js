@@ -27,6 +27,7 @@ define(function(require, exports, module) {
 	}
 
 	var CLS_VIEWROOT_BOX = 'viewroot-box',
+		CLS_VIEWROOT_BG = 'viewroot-bg',
 		CLS_VIEWROOT = 'viewroot';
 
 	var View = BaseEventObject.extend({
@@ -36,7 +37,7 @@ define(function(require, exports, module) {
 				return this.el.find(s);
 			}.bind(this);
 			this.id = createPageId();
-			this.root = $('<div class="'+CLS_VIEWROOT_BOX+'"><div class="'+CLS_VIEWROOT+'"></div></div>');
+			this.root = $('<div class="'+CLS_VIEWROOT_BOX+'"><div class="'+CLS_VIEWROOT_BG+'"></div><div class="'+CLS_VIEWROOT+'"></div></div>');
 			this.el = this.root.find('.'+CLS_VIEWROOT);
 			this.root.attr('id',this.id);
 			this.root.hide();
@@ -70,6 +71,9 @@ define(function(require, exports, module) {
 
 		getRoot:function(){
 			return this.root;
+		},
+		getRootBg:function(){
+			return this.root.find('.'+CLS_VIEWROOT_BG);
 		},
 		turning:function(){
 			this.frame.turning.apply(this.frame,arguments);
