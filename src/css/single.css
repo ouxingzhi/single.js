@@ -310,29 +310,29 @@ body, html {
  * 向前的离开
  */
 .header_forward_out{
-	-webkit-animation:header_forward_out .3s ease ;
-	animation:header_forward_out .3s ease ;
+	-webkit-animation:header_forward_out .3s forwards ;
+	animation:header_forward_out .3s forwards ;
 }
 /**
  * 向前的进入
  */
 .header_forward_in{
-	-webkit-animation:header_forward_in .3s ease;
-	animation:header_forward_in .3s ease;
+	-webkit-animation:header_forward_in .3s forwards;
+	animation:header_forward_in .3s forwards;
 }
 /**
  * 返回的离开
  */
 .header_back_out{
-	-webkit-animation:header_back_out .3s ease ;
-	animation:header_back_out .3s ease ;
+	-webkit-animation:header_back_out .3s forwards ;
+	animation:header_back_out .3s forwards ;
 }
 /**
  * 返回的进入
  */
 .header_back_in{
-	-webkit-animation:header_back_in .3s ease;
-	animation:header_back_in .3s ease;
+	-webkit-animation:header_back_in .3s forwards;
+	animation:header_back_in .3s forwards;
 }
 
 

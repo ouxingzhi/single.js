@@ -73,10 +73,20 @@ define(function(require){
 			var m = date.getMinutes();
 			return m < 10 ? '0'+m : m;
 		},
+		//无前导零的分钟数
+		I:function(date){
+			var m = date.getMinutes();
+			return m;
+		},
 		//秒数，有前导零
 		s:function(date){
 			var s = date.getSeconds();
 			return s < 10 ? '0'+s : s;
+		},
+		//秒数，无前导零
+		S:function(date){
+			var s = date.getSeconds();
+			return s;
 		},
 		//今天，昨天
 		O:function(date){
