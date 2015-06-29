@@ -27,6 +27,7 @@
     "gulp-seajs-pack": "^1.0.9",
     "gulp-seajs-package": "0.0.3",
     "gulp-seajs-transport": "^0.3.1",
-    "gulp-uglify": "^1.2.0"
+    "gulp-uglify": "^1.2.0",
+    "gulp-seajs-r":"^1.0.0"
   }
 }
