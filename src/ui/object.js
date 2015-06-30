@@ -34,7 +34,11 @@ define(function(require) {
 			}else{
 				this.container = $('body');
 			}
-			
+			if(!Base.isNUL(options.cls)){
+				this.on('create',function(){
+					this.$el.addClass(options.cls);
+				});
+			}
 		},
 		randFn:function(fn){
 			var fnname = UiBase.createFnName();
