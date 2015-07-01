@@ -58,6 +58,9 @@ define(function(require){
 				view = $('<div class="'+CLS_BLOCK_VIEW+'" id="'+id+'"></div>');
 				this.box.append(view);
 			}
+			if(options.cls){
+				view.addClass(options.cls);
+			}
 			var notAnimte = options.notAnimte || false;
 			if(options.template){
 				var data = options.data || {};
