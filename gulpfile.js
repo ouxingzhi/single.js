@@ -13,7 +13,7 @@ var build = './build2';
 
 var libs_src = './libs';
 
-var libs_build = './libsbuild';
+var libs_build = build + '/libs';
 
 // gulp.task('default',function(){
 // 	return gulp.src(src + '/**',{base:'./src'})
