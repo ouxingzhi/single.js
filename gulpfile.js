@@ -15,6 +15,13 @@ var libs_src = './libs';
 
 var libs_build = build + '/libs';
 
+var ignorejs = [
+	'!' + src + '/common/lrc.js',
+	'!' + src + '/common/lrcview.js',
+	'!' + src + '/common/scroll.js',
+	'!' + src + '/common/audioplay.js',
+];
+
 // gulp.task('default',function(){
 // 	return gulp.src(src + '/**',{base:'./src'})
 // 		.pipe(r());
@@ -38,7 +45,7 @@ gulp.task('build.min.html',['clean'],function(){
 });
 
 gulp.task('build.pack.js',['clean'],function(){
-	return gulp.src([src + '/**/*.js',src + '/**/*.html'],{base:src})
+	return gulp.src([src + '/**/*.js',src + '/**/*.html'].concat(ignorejs),{base:src})
 		.pipe(r())
 		.pipe(uglify({
             mangle: {except: ['$super']}
@@ -58,7 +65,8 @@ gulp.task('build.libs.js',['cleanlibs'],function(){
 			libs_src + '/zepto.min.js',
 			libs_src + '/underscore-min.js',
 			libs_src + '/sea.js',
-			libs_src + '/seajs-text.js'
+			libs_src + '/seajs-text.js',
+			libs_src + '/fastclick.js'
 			])
 		.pipe(uglify())
 		.pipe(concat('libs.min.js'))

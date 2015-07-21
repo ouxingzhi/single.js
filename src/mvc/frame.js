@@ -127,7 +127,8 @@ define(function(require, exports, module) {
 		},
 		hashChange:function(hashdata){
 			if(!hashdata.view){
-				hashdata = CommonUrlHash.parse(this.defaultView);
+				hashdata = new CommonUrlHash(this.defaultView)
+				//hashdata = CommonUrlHash.parse(this.defaultView);
 			}
 			this.hashdata = hashdata;
 			this.header.setForward(this.hashdata.forward);
@@ -139,18 +140,28 @@ define(function(require, exports, module) {
 			this.getView(viewname,hashdata).then(function(resolve,reject,view){
 				self.lastView = self.curView || view;
 				self.curView = view;
+				view.emit('onLoadBefore',self.lastView.hashdata.view);
 				view.onLoad(self.lastView.hashdata.view);
+				view.emit('onLoadAfter',self.lastView.hashdata.view);
 			});
 		},
 		turning:function(transtype){
 			var lastView = this.lastView || this.curView;
 			if(this.curView === this.lastView){
 				this.curView.getRoot().show();
+				this.curView.emit('onShowBefore',lastView.hashdata.view);
 				this.curView.onShow(lastView.hashdata.view);
+				this.curView.emit('onShowAfter',lastView.hashdata.view);
+
 			}else{
 				this.transferView(transtype,this.lastView,this.curView,function(){
+					this.lastView.emit('onHideBefore');
 					this.lastView.onHide();
+					this.lastView.emit('onHideAfter');
+
+					this.curView.emit('onShowBefore',lastView.hashdata.view);
 					this.curView.onShow(lastView.hashdata.view);
+					this.curView.emit('onShowAfter',lastView.hashdata.view);
 				});
 			}
 		},

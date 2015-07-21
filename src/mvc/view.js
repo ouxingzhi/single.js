@@ -36,7 +36,7 @@ define(function(require, exports, module) {
 			this['$'] = function(s){
 				return this.el.find(s);
 			}.bind(this);
-			this.id = createPageId();
+			this.id = hashdata.view;
 			this.root = $('<div class="'+CLS_VIEWROOT_BOX+'"><div class="'+CLS_VIEWROOT_BG+'"></div><div class="'+CLS_VIEWROOT+'"></div></div>');
 			this.el = this.root.find('.'+CLS_VIEWROOT);
 			this.root.attr('id',this.id);
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
 			this.hashdata = hashdata;
 
 			this.onCreate();
-
+			this.emit('onCreate');
 
 		},
 		$P:function(index,defval){
