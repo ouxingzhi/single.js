@@ -60,6 +60,7 @@ define(function(require, exports, module) {
 				frame:this
 			});
 
+
 			this.name;
 
 			this.views = new BaseHash();
@@ -89,6 +90,10 @@ define(function(require, exports, module) {
 			this.setOption(cfg);
 			this.initDom();
 			//this.hashChange(CommonUrlHash.parse(this.defaultView));
+
+			if(this.app.config.hideHeader){
+				this.header.hide();
+			}
 		},
 		setOption:function(cfg){
 			if(!Base.isNUL(cfg.app)){

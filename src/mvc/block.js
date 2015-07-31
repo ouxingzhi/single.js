@@ -73,16 +73,17 @@ define(function(require){
 				var transition = notAnimte || !this.transition ? TransitionNotAnimte : this.transition;
 				var lastView = view.siblings('.'+CLS_CURRENT_BLOCK_VIEW);
 				if(lastView.length){
-					if(this.forward){
-						transition.into(lastView,view,function(){
+					var fn = this.forward ? transition.into : transition.out;
+					
+					if(lastView.width() && lastView.height()){
+						fn(lastView,view,function(){
 							lastView.removeClass(CLS_CURRENT_BLOCK_VIEW);
 							view.addClass(CLS_CURRENT_BLOCK_VIEW);
 						});
 					}else{
-						transition.out(lastView,view,function(){
-							lastView.removeClass(CLS_CURRENT_BLOCK_VIEW);
-							view.addClass(CLS_CURRENT_BLOCK_VIEW);
-						});
+						fn(lastView,view,function(){})
+						lastView.removeClass(CLS_CURRENT_BLOCK_VIEW);
+						view.addClass(CLS_CURRENT_BLOCK_VIEW);
 					}
 				}else{
 					view.addClass(CLS_CURRENT_BLOCK_VIEW);
