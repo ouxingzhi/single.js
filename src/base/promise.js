@@ -44,7 +44,7 @@ define(function(){
 			var promises = slice.call(arguments);
 			var datas = [];
 			var self = this;
-			var resolve = function(data){
+			var resolve = function(success, error, data){
 					if(self.state !== Promise.STATE_UNFULFILLED) return;
 					var index = indexOf.call(promises,this);
 					if(index > -1){
