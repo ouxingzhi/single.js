@@ -1,0 +1,1 @@
+define("SINGLE/storage/local.storage.js",["SINGLE/storage/storage"],function(require,e,a){var o=require("SINGLE/storage/storage");return new o(localStorage)});

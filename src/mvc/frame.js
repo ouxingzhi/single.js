@@ -7,6 +7,7 @@ define(function(require, exports, module) {
 		CommonUrlHash = require('common/url.hash'),
 		MvcHeader = require('mvc/header'),
 		MvcTransitionDefault = require('mvc/transition.default'),
+		MvcTransitionUpDown = require('mvc/transition.updown'),
 		MvcTransitionNotAnime = require('mvc/transition.notanime');
 
 		//常用ui组件
@@ -75,6 +76,7 @@ define(function(require, exports, module) {
 
 			this.transtions = {
 				'default':MvcTransitionDefault,
+				'updown':MvcTransitionUpDown,
 				'notanimte':MvcTransitionNotAnime
 			};
 
@@ -120,8 +122,8 @@ define(function(require, exports, module) {
 				Base.mix(this.transtions,cfg.transtions);
 			}
 
-			if(!Base.isNUL(cfg.defaultTranstion)){
-				this.defaultTranstion = cfg.defaultTranstion;
+			if(!Base.isNUL(cfg.config.defaultTranstion)){
+				this.defaultTranstion = cfg.config.defaultTranstion;
 			}
 		},
 		getRoot:function(){
@@ -206,17 +208,37 @@ define(function(require, exports, module) {
 			return (this.viewpath + '/' + viewname).replace(/\/+/g,'/') + '.js';
 		},
 		transferView:function(transtype,lastView,curView,callback){
+			var fn = this.getTransferFn(transtype);
+			fn(lastView.getRoot(),curView.getRoot(),function(){
+				callback.call(this);
+			},this);
+		},
+		getTransferFn:function(transtype){
+			var fn;
 			transtype = transtype || this.defaultTranstion;
-			var transtion = this.transtions[transtype] || MvcTransitionDefault;
-			if(this.hashdata.forward){
-				transtion.into(lastView.getRoot(),curView.getRoot(),function(){
-					callback.call(this);
-				},this);
-			}else{
-				transtion.out(lastView.getRoot(),curView.getRoot(),function(){
-					callback.call(this);
-				},this);
+			
+			switch(transtype){
+				case 'left':
+					fn = MvcTransitionDefault.into;
+					break;
+				case 'right':
+					fn = MvcTransitionDefault.out;
+					break;
+				case 'top':
+					fn = MvcTransitionUpDown.into;
+					break;
+				case 'bottom':
+					fn = MvcTransitionUpDown.out;
+					break;
+				default:
+					var transtion = this.transtions[transtype] || MvcTransitionDefault;
+					if(this.hashdata.forward){
+						fn = transtion.into;
+					}else{
+						fn = transtion.out;
+					}
 			}
+			return fn;
 		},
 		forward:function(hash){
 			var data = CommonUrlHash.parse(hash);

@@ -192,6 +192,113 @@ body, html {
 	animation:default_back_in .3s forwards;
 }
 
+/*** updown transition start****/
+
+@-webkit-keyframes updown_forward_out{
+	from{
+		-webkit-transform:translate3d(0,0%,0);
+	}
+	to{
+		-webkit-transform:translate3d(0,-100%,0);
+	}
+}
+
+@-webkit-keyframes updown_forward_in{
+	from{
+		-webkit-transform:translate3d(0,100%,0);
+	}
+	to{
+		-webkit-transform:translate3d(0,0%,0);
+	}
+}
+
+@-webkit-keyframes updown_back_out{
+	from{
+		-webkit-transform:translate3d(0,0%,0px);
+	}
+	to{
+		-webkit-transform:translate3d(0,100%,0px);
+	}
+}
+
+@-webkit-keyframes updown_back_in{
+	from{
+		-webkit-transform:translate3d(0,-100%,0);
+	}
+	to{
+		-webkit-transform:translate3d(0,0%,0);
+	}
+}
+
+/*********/
+
+@keyframes updown_forward_out{
+	from{
+		transform:translate3d(0,0%,0);
+	}
+	to{
+		transform:translate3d(0,-100%,0);
+	}
+}
+
+@keyframes updown_forward_in{
+	from{
+		transform:translate3d(0,100%,0);
+	}
+	to{
+		transform:translate3d(0,0%,0);
+	}
+}
+
+@keyframes updown_back_out{
+	from{
+		transform:translate3d(0,0%,0px);
+	}
+	to{
+		transform:translate3d(0,100%,0px);
+	}
+}
+
+@keyframes updown_back_in{
+	from{
+		transform:translate3d(0,-100%,0);
+	}
+	to{
+		transform:translate3d(0,0%,0);
+	}
+}
+/**
+ * 向前的离开
+ */
+.updown_forward_out{
+	-webkit-animation:updown_forward_out .3s forwards ;
+	animation:updown_forward_out .3s forwards ;
+
+}
+/**
+ * 向前的进入
+ */
+.updown_forward_in{
+	-webkit-animation:updown_forward_in .3s forwards;
+	animation:updown_forward_in .3s forwards;
+}
+/**
+ * 返回的离开
+ */
+.updown_back_out{
+	-webkit-animation:updown_back_out .3s forwards ;
+	animation:updown_back_out .3s forwards ;
+}
+/**
+ * 返回的进入
+ */
+.updown_back_in{
+	-webkit-animation:updown_back_in .3s forwards;
+	animation:updown_back_in .3s forwards;
+}
+
+/*** updown transition end ****/
+
 /** header 动画 **/
 @-webkit-keyframes header_forward_out{
 	from{

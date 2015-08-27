@@ -1,0 +1,1 @@
+define("SINGLE/storage/session.store.js",["SINGLE/storage/store","SINGLE/storage/session.storage"],function(require,e,s){var o=require("SINGLE/storage/store"),r=require("SINGLE/storage/session.storage");return o.extend({buildStorage:function(){return r}})});
