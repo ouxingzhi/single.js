@@ -113,7 +113,7 @@ define(function(require, exports, module) {
 				this.param.delAttr(n);
 			}else{
 				if(!this.param) this.param = {};
-				delete this.param[k];
+				delete this.param[n];
 			}
 		},
 		getResult:function(){
