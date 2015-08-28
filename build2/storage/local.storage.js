@@ -1,1 +1,0 @@
-define("storage/local.storage.js",["storage/storage"],function(require,e,a){var o=require("storage/storage");return new o(localStorage)});

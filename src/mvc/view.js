@@ -63,7 +63,7 @@ define(function(require, exports, module) {
 			return this.hashdata.path[index] || defval; 
 		},
 		$Q:function(key,defval){
-			return this.hashdata.query[key] || defval; 
+			return this.hashdata.query[key] ? decodeURIComponent(this.hashdata.query[key]) : defval;
 		},
 		setHashData:function(hashdata){
 			this.hashdata = hashdata;

@@ -60,6 +60,7 @@ define(function(require, exports, module) {
 						viewpath:cfg.viewpath || this.config.viewpath,
 						transtion:cfg.transtion,
 						framebox:framebox,
+						config:this.config,
 						defaultView:cfg.defaultView || this.config.defaultView || 'index'
 					});
 					if(frame === fname){

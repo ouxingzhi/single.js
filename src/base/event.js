@@ -6,6 +6,7 @@ define(function(require, exports, module) {
 		propertys:function(){
 			this.__event = BaseVal({});
 		},
+
 		initialize:function($super,options){
 			$super(options);
 		},
@@ -15,6 +16,14 @@ define(function(require, exports, module) {
 			if(!override || Base.indexOf(e.v[type],function(v){ return fn === v.fn;}) === -1){
 				e.v[type].push({fn:fn,space:space});
 			}
+		},
+		one:function(type,fn,space,override){
+			var self = this;
+			var oFn = function(){
+				fn.apply(self, arguments);
+				self.off(type, oFn);
+			};
+			self.on(type,oFn,space,override)
 		},
 		off:function(type,fn){
 			if(!type && !fn){

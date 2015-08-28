@@ -1,1 +1,0 @@
-define("mvc/transition.notanime.js",["mvc/transition.interface"],function(require,n,i){var t=require("mvc/transition.interface"),e=t.extend({into:function(n,i,t,e){n.hide(),i.show(),t&&t.call(e)},out:function(n,i,t,e){n.hide(),i.show(),t&&t.call(e)},isAnimation:function(n){return!1}});return new e});

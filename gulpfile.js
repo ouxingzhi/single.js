@@ -9,11 +9,13 @@ var r = require('gulp-seajs-r');
 
 var src = './src';
 
-var build = './build2';
+var build = './build';
 
 var libs_src = './libs';
 
 var libs_build = build + '/libs';
+
+var prefix = 'SINGLE/';
 
 var ignorejs = [
 	'!' + src + '/common/lrc.js',
@@ -31,7 +33,12 @@ var ignorejs = [
 
 gulp.task('build.min.js',['clean'],function(){
 	return gulp.src([src + '/**/*.js'],{base:src})
-		.pipe(r())
+		.pipe(r({
+			formatPath:function(a){
+				a = prefix+a;
+				return a;
+			}
+		}))
 		.pipe(uglify({
             mangle: {except: ['require','$super']}
         }))
@@ -46,9 +53,14 @@ gulp.task('build.min.html',['clean'],function(){
 
 gulp.task('build.pack.js',['clean'],function(){
 	return gulp.src([src + '/**/*.js',src + '/**/*.html'].concat(ignorejs),{base:src})
-		.pipe(r())
+		.pipe(r({
+			formatPath:function(a){
+				a = prefix+a;
+				return a;
+			}
+		}))
 		.pipe(uglify({
-            mangle: {except: ['$super']}
+            mangle: {except: ['require','$super']}
         }))
 		.pipe(concat('main.min.js'))
 		.pipe(gulp.dest(build));
