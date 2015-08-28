@@ -185,7 +185,6 @@ define(function(require, exports, module) {
 						this.viewport.append(view.getRoot());
 						view.emit('addframe');
 						this.views.push(viewname,view);
-						view.onCreate();
 						promise.resolve(view);
 					}else{
 						throw new Error('not found `'+viewname+'.js`');
