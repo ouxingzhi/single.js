@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui" />
+	<title>音乐应用</title>
+	<link rel="stylesheet" type="text/css" href="../src/css/single.css">
+	<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+	
+	<script type="text/javascript" src="../libs/sea-debug.js"></script>
+	<script type="text/javascript" src="../libs/seajs-text.js"></script>
+	<script type="text/javascript" src="../libs/underscore-min.js"></script>
+	<script type="text/javascript" src="../libs/zepto.min.js"></script>
+	<script type="text/javascript" src="./src/config.src.js"></script>
+
+	<script type="text/javascript">
+		seajs.use(['mvc/application','webapp/app.config'],function(MvcApplication,config){
+			console.log(html);
+			new MvcApplication(config).start();
+		})
+	</script>
+</body>
+</html>

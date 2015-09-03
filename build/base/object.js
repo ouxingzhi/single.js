@@ -1,0 +1,1 @@
+define("SINGLE/base/object.js",["SINGLE/base/class","SINGLE/base/var"],function(require,s,a){var e=require("SINGLE/base/class"),i=require("SINGLE/base/var"),n=e({initialize:function($super,s){$super(s)},destruct:function(){var s;for(var a in this)this.hasOwnProperty(a)&&(s=this[a],s instanceof i&&s.del(),this[a]=null)}});return n});
