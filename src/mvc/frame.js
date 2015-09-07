@@ -134,8 +134,13 @@ define(function(require, exports, module) {
 		},
 		hashChange:function(hashdata){
 			if(!hashdata.view){
-				hashdata = new CommonUrlHash(this.defaultView)
-				//hashdata = CommonUrlHash.parse(this.defaultView);
+				var defaultHash = new CommonUrlHash(this.defaultView);
+				for (var attr in defaultHash){
+					if (!Base.isEmpty(hashdata[attr])){
+						defaultHash[attr] = hashdata[attr];
+					}
+				}
+				hashdata = defaultHash;
 			}
 			this.hashdata = hashdata;
 			this.header.setForward(this.hashdata.forward);
