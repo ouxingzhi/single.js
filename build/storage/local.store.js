@@ -1,1 +1,1 @@
-define("SINGLE/storage/local.store.js",["storage/store","storage/local.storage"],function(require,e,o){var r=require("storage/store"),t=require("storage/local.storage");return r.extend({buildStorage:function(){return t}})});
+define("SINGLE/storage/local.store.js",["SINGLE/storage/store","SINGLE/storage/local.storage"],function(require,e,o){var r=require("SINGLE/storage/store"),t=require("SINGLE/storage/local.storage");return r.extend({buildStorage:function(){return t}})});
