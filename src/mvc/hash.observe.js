@@ -36,7 +36,7 @@ define(function(require, exports, module) {
 			return this;
 		},
 		getCurHashData:function(){
-			return new CommonUrlHash(window.location.hash);
+			return new CommonUrlHash(window.location.hash || window.location.search);
 		}
 	});
 });
