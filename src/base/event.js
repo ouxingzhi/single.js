@@ -34,7 +34,7 @@ define(function(require, exports, module) {
 			var e = this.__event,index;
 			e.v[type] = e.v[type] || [];
 			if(fn){
-				index = ase.indexOf(e.v[type],function(v){ return fn === v.fn;});
+				index = Base.indexOf(e.v[type],function(v){ return fn === v.fn;});
 				if(index > -1){
 					e.v[type].splice(index,1);
 				}
