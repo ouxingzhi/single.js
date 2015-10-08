@@ -9,6 +9,7 @@ define(function(require, exports, module) {
 		MvcTransitionDefault = require('mvc/transition.default'),
 		MvcTransitionUpDown = require('mvc/transition.updown'),
 		MvcTransitionNotAnime = require('mvc/transition.notanime');
+		MvcErrorView = require('mvc/errorview');
 
 		//常用ui组件
 	var UiDialog = require('ui/dialog'),
@@ -82,6 +83,8 @@ define(function(require, exports, module) {
 
 			this.defaultTranstion = 'default';
 
+			this.defaultErrorView;
+
 			this.lastView;
 
 			this.curView;
@@ -124,6 +127,10 @@ define(function(require, exports, module) {
 
 			if(!Base.isNUL(cfg.config.defaultTranstion)){
 				this.defaultTranstion = cfg.config.defaultTranstion;
+			}
+
+			if(!Base.isNUL(cfg.config.defaultErrorView)){
+				this.defaultErrorView = cfg.config.defaultErrorView;
 			}
 		},
 		getRoot:function(){
@@ -179,6 +186,7 @@ define(function(require, exports, module) {
 		getView:function(viewname,hashdata){
 			var view = this.views.get(viewname);
 			var promise = new Promise();
+			var self = this;
 			if(view){
 				view.setHashData(hashdata);
 				promise.resolve(view);
@@ -191,11 +199,39 @@ define(function(require, exports, module) {
 						this.views.push(viewname,view);
 						promise.resolve(view);
 					}else{
-						throw new Error('not found `'+viewname+'.js`');
+						//错误逻辑
+						var errorview = this.views.get('<errorview>');
+						if(errorview){
+							errorview.setHashData(hashdata);
+							promise.resolve(errorview);
+						}else{
+							self.getErrorView(function(View){
+								if(!View){
+									throw new Error('not found `'+ viewname +'.js`');
+								}else{
+									var view = new View('<errorview>',hashdata,this,this.app);
+									this.viewport.append(view.getRoot());
+									view.emit('addframe');
+									this.views.push('<errorview>',view);
+									promise.resolve(view);
+								}
+							});
+						}
 					}
 				});
 			}
 			return promise;
+		},
+		getErrorView:function(callback){
+			var viewname = this.defaultErrorView;
+			var self = this;
+			if(viewname){
+				this.loadView(viewname,function(View){
+					callback.call(this,View);
+				});
+			}else{
+				callback.call(this,MvcErrorView);
+			}
 		},
 		loadView:function(viewname,callback){
 			var fullpath = this.buildFullPath(viewname),
