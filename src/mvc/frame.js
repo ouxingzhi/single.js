@@ -302,7 +302,7 @@ define(function(require, exports, module) {
 			getToast().hide()
 		},
 		showAlert:function(content,buttons,title,showTitle){
-
+			
 			getDialog().show({
 				title:title || '标题',
 				content:content || '',

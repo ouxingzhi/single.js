@@ -114,11 +114,15 @@ define(function(require){
 
 		},
 		update:function(){
+			var self = this;
 			if(this.$el){
 				if(this.hideClose){
 					this.doms[C.UI_DIALOG_CLOSE].hide();
 				}else{
 					this.doms[C.UI_DIALOG_CLOSE].show();
+					this.doms[C.UI_DIALOG_CLOSE].on('click',function(){
+						self.hide();
+					});
 				}
 				if(this.hideTitle){
 					this.doms[C.UI_DIALOG_HEAD].hide();
