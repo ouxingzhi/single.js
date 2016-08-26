@@ -14,3 +14,4 @@
 	#list?param=value&param2=value2
 
 如例子所示，list指定view文件名，在指定路径加载list.js,并把?号后面的参数传入。
+例子:http://ouxingzhi.github.io/single.js_todolist/
